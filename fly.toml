@@ -1,37 +1,23 @@
+# fly.toml app configuration file generated for cheriven on 2026-01-18T12:54:50Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
-app = "express-ejs-boilerplate"
-primary_region = "dfw"
-kill_signal = "SIGINT"
-kill_timeout = 5
+app = 'cheriven'
+primary_region = 'fra'
 
-[env]
-  PORT = "8080"
-  NODE_ENV = "production"
-
-
-
-[deploy]
-  release_command = "npm run build"
+[build]
 
 [http_service]
   internal_port = 8080
   force_https = true
-  auto_stop_machines = "stop"
-  min_machines_running = 1
-  processes = ["app"]
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
 
 [[vm]]
-  cpu_kind = "shared"
+  memory = '1gb'
+  cpu_kind = 'shared'
   cpus = 1
   memory_mb = 256
-
-[checks]
-  [checks.health]
-    type = "http"
-    interval = "10s"
-    timeout = "2s"
-    grace_period = "5s"
-    method = "get"
-    path = "/health"
-
-
