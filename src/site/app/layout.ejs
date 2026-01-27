@@ -1,97 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>
-    <%= locals.metadata?.title || 'iDegin Cloud Website' %>
-  </title>
-  <% if (locals.metadata?.description) { %>
-    <meta name="description" content="<%= locals.metadata.description %>">
-  <% } %>
-  <% if (locals.metadata?.keywords) { %>
-    <meta name="keywords" content="<%= locals.metadata.keywords.join(', ') %>">
-  <% } %>
-
-  <!-- Open Graph / Social Media Meta Tags -->
-  <% if (locals.metadata?.og) { %>
-    <meta property="og:type" content="<%= locals.metadata.og.type || 'website' %>">
-    <% if (locals.metadata.og.url) { %>
-      <meta property="og:url" content="<%= locals.metadata.og.url %>">
-    <% } %>
-    <meta property="og:title" content="<%= locals.metadata.og.title || locals.metadata.title %>">
-    <meta property="og:description" content="<%= locals.metadata.og.description || locals.metadata.description %>">
-    <% if (locals.metadata.og.image) { %>
-      <meta property="og:image" content="<%= locals.metadata.og.image %>">
-    <% } %>
-  <% } %>
-
-  <!-- Twitter Meta Tags -->
-  <% if (locals.metadata?.twitter) { %>
-    <meta property="twitter:card" content="<%= locals.metadata.twitter.card || 'summary' %>">
-    <% if (locals.metadata.twitter.url) { %>
-      <meta property="twitter:url" content="<%= locals.metadata.twitter.url %>">
-    <% } %>
-    <meta property="twitter:title" content="<%= locals.metadata.twitter.title || locals.metadata.title %>">
-    <meta property="twitter:description" content="<%= locals.metadata.twitter.description || locals.metadata.description %>">
-    <% if (locals.metadata.twitter.image) { %>
-      <meta property="twitter:image" content="<%= locals.metadata.twitter.image %>">
-    <% } %>
-  <% } %>
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/favicon.webp"/>
-
-	<!-- Google fonts -->
-	<link rel="preconnect" href="../../fonts.googleapis.com/index.html"/>
-	<link rel="preconnect" href="../../fonts.gstatic.com/index.html" crossorigin/>
-	<link href="../../fonts.googleapis.com/css204b5.css?family=Albert+Sans:ital,wght@0,100..900;1,100..900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet"/>
-
-	<!-- Vendors Css -->
-	<link rel="stylesheet" href="assets/vendor/animate/animate.min.css"/>
-	<link rel="stylesheet" href="assets/vendor/fontawesome-pro/fontawesome.min.css"/>
-	<link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css"/>
-	<link rel="stylesheet" href="assets/vendor/swiper/swiper-bundle.min.css"/>
-	<link rel="stylesheet" href="assets/vendor/aos/aos.css"/>
-	<link rel="stylesheet" href="assets/vendor/fancybox/fancybox.css"/>
-
-	<!-- Main CSS -->
-	<link rel="stylesheet" href="assets/css/spacing.css"/>
-	<link rel="stylesheet" href="assets/css/main.css"/>
-
-</head>
 <body class="min-h-screen bg-background text-foreground">
-  <!-- preloader start-->
+<!-- preloader start-->
 <div id="preloader">
-	<div class="preloader">
-		<img src="assets/img/thumbs/preloader.gif" alt="preloader">
-	</div>
+    <div class="preloader">
+        <img src="/assets/img/thumbs/preloader.gif" alt="preloader">
+    </div>
 </div>
 <!-- preloader end  -->
 
-  <%- include('../components/header') %>
-  <%- include('../components/off-canvas-sidebar') %>
-  <%- include('../components/off-canvas-menubar') %>
-  <main class="flex-1">
+<%- include('../components/header') %>
+<%- include('../components/off-canvas-sidebar') %>
+<%- include('../components/off-canvas-menubar') %>
+<main class="flex-1">
     <% if (locals.layoutChain && locals.layoutChain.length > 1) { %>
-      <%- include('../' + locals.layoutChain[1], { body: body }) %>
+        <%- include('../' + locals.layoutChain[1], { body: body }) %>
     <% } else { %>
-      <%- body %>
+        <%- body %>
     <% } %>
-  </main>
-  <%- include('../components/footer') %>
+    <%- include('../components/contact-cta') %>
+</main>
+<%- include('../components/footer') %>
 
-  <!-- Vendors Js -->
-<script src="assets/vendor/jquery/jquery.min.js"></script>
-<script src="assets/vendor/popper/popper.min.js"></script>
-<script src="assets/vendor/bootstrap/bootstrap.min.js"></script>
-<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-<script src="assets/vendor/aos/aos.js"></script>
-<script src="assets/vendor/fancybox/fancybox.umd.js"></script>
-<script src="assets/vendor/counter/purecounter.js"></script>
+<!-- Vendors Js -->
+<script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/popper/popper.min.js"></script>
+<script src="/assets/vendor/bootstrap/bootstrap.min.js"></script>
+<script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/assets/vendor/aos/aos.js"></script>
+<script src="/assets/vendor/fancybox/fancybox.umd.js"></script>
+<script src="/assets/vendor/counter/purecounter.js"></script>
 
 <!-- Main Js -->
-<script src="assets/js/script.js"></script>
+<script src="/assets/js/script.js"></script>
 </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= locals.metadata?.title || 'iDegin Cloud Website' %>
+    </title>
+    <% if (locals.metadata?.description) { %>
+        <meta name="description" content="<%= locals.metadata.description %>">
+    <% } %>
+    <% if (locals.metadata?.keywords) { %>
+        <meta name="keywords" content="<%= locals.metadata.keywords.join(', ') %>">
+    <% } %>
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <% if (locals.metadata?.og) { %>
+        <meta property="og:type" content="<%= locals.metadata.og.type || 'website' %>">
+        <% if (locals.metadata.og.url) { %>
+            <meta property="og:url" content="<%= locals.metadata.og.url %>">
+        <% } %>
+        <meta property="og:title" content="<%= locals.metadata.og.title || locals.metadata.title %>">
+        <meta property="og:description" content="<%= locals.metadata.og.description || locals.metadata.description %>">
+        <% if (locals.metadata.og.image) { %>
+            <meta property="og:image" content="<%= locals.metadata.og.image %>">
+        <% } %>
+    <% } %>
+
+    <!-- Twitter Meta Tags -->
+    <% if (locals.metadata?.twitter) { %>
+        <meta property="twitter:card" content="<%= locals.metadata.twitter.card || 'summary' %>">
+        <% if (locals.metadata.twitter.url) { %>
+            <meta property="twitter:url" content="<%= locals.metadata.twitter.url %>">
+        <% } %>
+        <meta property="twitter:title" content="<%= locals.metadata.twitter.title || locals.metadata.title %>">
+        <meta property="twitter:description"
+              content="<%= locals.metadata.twitter.description || locals.metadata.description %>">
+        <% if (locals.metadata.twitter.image) { %>
+            <meta property="twitter:image" content="<%= locals.metadata.twitter.image %>">
+        <% } %>
+    <% } %>
+
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/favicon.webp"/>
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="../../fonts.googleapis.com/index.html"/>
+    <link rel="preconnect" href="../../fonts.gstatic.com/index.html" crossorigin/>
+    <link href="../../fonts.googleapis.com/css204b5.css?family=Albert+Sans:ital,wght@0,100..900;1,100..900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Outfit:wght@100..900&amp;display=swap"
+          rel="stylesheet"/>
+
+    <!-- Vendors Css -->
+    <link rel="stylesheet" href="/assets/vendor/animate/animate.min.css"/>
+    <link rel="stylesheet" href="/assets/vendor/fontawesome-pro/fontawesome.min.css"/>
+    <link rel="stylesheet" href="/assets/vendor/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/assets/vendor/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="/assets/vendor/aos/aos.css"/>
+    <link rel="stylesheet" href="/assets/vendor/fancybox/fancybox.css"/>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/assets/css/spacing.css"/>
+    <link rel="stylesheet" href="/assets/css/main.css"/>
+
+</head>
 </html>
