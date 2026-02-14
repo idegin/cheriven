@@ -1,5 +1,4 @@
-
-<!-- breadcrumb-section start -->
+<!-- hero-section start -->
 <section class="breadcrumb-section">
     <div class="container-fluid">
         <div class="row g-0">
@@ -8,11 +7,11 @@
                     <div class="breadcrumb-nav" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                         <ul>
                             <li><a href='/'>Home</a></li>
-                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Programs</a></li>
                         </ul>
                     </div>
                     <div class="breadcrumb-title" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
-                        <h2>About Us</h2>
+                        <h2>Our Programs</h2>
                     </div>
                     <div class="shape-1">
                         <img src="/assets/img/shapes/shape-1.webp" alt="shape"/>
@@ -27,13 +26,23 @@
         </div>
     </div>
 </section>
-<!-- breadcrumb-section end -->
+<!-- hero-section end -->
 
-<%- include('../../components/home-about') %>
+<%- include('../../components/all-programs') %>
 
-<%- include('../../components/home-volunteers') %>
-
-<%- include('../../components/testimonials') %>
+<!-- Call to Action -->
+<section class="cta-section p-t-60 p-b-120">
+    <div class="container">
+        <div class="row justify-content-center">
+             <div class="col-xl-8 text-center">
+                 <div class="common-title">
+                     <h2>Want to Support a Specific Cause?</h2>
+                 </div>
+                 <p class="mb-4">Your contribution can directly impact the success of these programs.</p>
+                 <a class="e-primary-btn has-icon" href="/donations">Donate to a Campaign <span class="icon-wrap"><span class="icon"><i class="fa-regular fa-arrow-right"></i><i class="fa-regular fa-arrow-right"></i></span></span></a>
+             </div>
+        </div>
+    </div>
+</section>
 
 <%- include('../../components/partners') %>
-
