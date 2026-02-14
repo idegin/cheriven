@@ -1,0 +1,88 @@
+<div class="detail-sidebar" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
+    <div class="detail-sidebar-inner">
+        <% if (data.organizer) { %>
+        <div class="s-widget-wrap m-b-30">
+            <div class="w-title">
+                <h3>
+                    <img src="/assets/img/icons/icon-20.svg" alt="icon"/>
+                    Organizer
+                </h3>
+                <div class="bar-wrap">
+                    <div class="bar-1"></div>
+                    <div class="bar-2"></div>
+                </div>
+            </div>
+            <div class="organizer-info-wrap">
+                <div class="thumb">
+                    <img src="<%= data.organizer.image %>" alt="<%= data.organizer.name %>"/>
+                </div>
+                <div class="name">
+                    <h3><%= data.organizer.name %></h3>
+                </div>
+                <div class="text">
+                    <p>
+                        <%= data.organizer.role %>
+                    </p>
+                </div>
+                <!-- Removed static date/location as per CMS limitation or keep if needed -->
+            </div>
+        </div>
+        <% } %>
+
+        <% if (data.sidebar && data.sidebar.recentPrograms && data.sidebar.recentPrograms.length > 0) { %>
+        <div class="s-widget-wrap m-b-30">
+            <div class="w-title">
+                <h3>Recent Programs</h3>
+                <div class="bar-wrap">
+                    <div class="bar-1"></div>
+                    <div class="bar-2"></div>
+                </div>
+            </div>
+            <div class="recent-campaigns">
+                <% data.sidebar.recentPrograms.forEach(function(program) { %>
+                <div class="campaign">
+                    <div class="thumb">
+                        <a href="/programs/<%= program.slug %>">
+                            <img src="<%= program.image %>" alt="<%= program.title %>"/>
+                        </a>
+                    </div>
+                    <div>
+                        <div class="date">
+                            <p><%= program.date %></p>
+                        </div>
+                        <div class="name">
+                            <h5>
+                                <a href="/programs/<%= program.slug %>"><%= program.title %></a>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+        </div>
+        <% } %>
+
+        <div class="s-widget-wrap">
+            <div class="w-title">
+                <h3>Share This Project</h3>
+                <div class="bar-wrap">
+                    <div class="bar-1"></div>
+                    <div class="bar-2"></div>
+                </div>
+            </div>
+            <div class="socials">
+                <div class="social-links">
+                    <a href="#" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href), '_blank'); return false;">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" onclick="window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(window.location.href) + '&text=' + encodeURIComponent('<%= data.title %>'), '_blank'); return false;">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                    <a href="#" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(window.location.href), '_blank'); return false;">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

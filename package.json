@@ -24,6 +24,7 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
+    "@types/nodemailer": "^7.0.9",
     "axios": "^1.13.2",
     "dotenv": "^17.2.1",
     "ejs": "^3.1.10",
@@ -33,6 +34,8 @@
     "express-rate-limit": "^8.2.1",
     "helmet": "^8.1.0",
     "hpp": "^0.2.3",
+    "node-fetch": "^3.3.2",
+    "nodemailer": "^8.0.1",
     "rimraf": "^6.0.1",
     "tsup": "^8.5.0",
     "typescript": "^5.9.2"

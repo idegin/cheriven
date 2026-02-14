@@ -1,0 +1,41 @@
+<% if (typeof data !== 'undefined' && data) { %>
+<div class="col-xl-4 m-b-30">
+    <div class="camping-card <%= data.isActive ? 'active' : '' %>">
+        <div class="thumb">
+            <a href='/programs/<%= data.slug %>'><img alt="<%= data.thumbAlt || 'thumb' %>" src="<%= data.image %>"></a>
+            <div class="category">
+                <a href='/programs/<%= data.slug %>'><%= data.category %></a>
+            </div>
+        </div>
+        <div class="content">
+            <div class="content-top">
+                <div class="date">
+                    <img alt="calendar-icon" src="/assets/img/icons/calendar.svg"> <span><%= data.daysLeft %> Days Left</span>
+                </div>
+                <div class="title">
+                    <h3><a href='/programs/<%= data.slug %>'><%= data.title %></a></h3>
+                </div>
+                <div class="text">
+                    <p><%= data.description %></p>
+                </div>
+            </div>
+            <div class="donation-wrap">
+                <div class="d-top">
+                    <p>Donation Complete</p>
+                    <p><%= data.percentComplete %>%</p>
+                </div>
+                <div aria-label="Basic example" aria-valuemax="100" aria-valuemin="0" aria-valuenow="<%= data.percentComplete %>" class="progress" role="progressbar">
+                    <div class="progress-bar" style="width: <%= data.percentComplete %>%"></div>
+                </div>
+                <div class="fund">
+                    <p>Raised: <span><%= data.raised %></span></p>
+                    <p>Goal: <span><%= data.goal %></span></p>
+                </div>
+                <div class="d-bottom">
+                    <a class='e-primary-btn has-icon d-btn' href='/donations'>Donate Now <span class="icon-wrap"><span class="icon"><i class="fa-regular fa-arrow-right"></i> <i class="fa-regular fa-arrow-right"></i></span></span></a> <button class="d-wishlist"><i class="fa-regular fa-heart"></i> <span>259</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% } %>

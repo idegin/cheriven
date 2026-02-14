@@ -1,0 +1,162 @@
+
+<!-- blog-details-section start -->
+<!-- blog-details-section start (using services-details-section layout as requested) -->
+<section class="services-details-section p-t-120 p-b-250 p-t-lg-80 p-t-md-80 p-t-xs-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="details-layout-wrap">
+                    <div class="details-content" data-aos="fade-up" data-aos-delay="600" data-aos-duration="1000">
+                        <div class="blog-card-5 m-b-40">
+                            <div class="thumb">
+                                <img alt="<%= data.title %>" src="<%= data.image %>">
+                            </div>
+                            <div class="content">
+                                <div class="blog-info">
+                                    <div class="publisher-info">
+                                        <i class="fa-light fa-circle-user" style="color: var(--primary-color);"></i>
+                                        <p>By <%= data.author %></p>
+                                    </div>
+                                    <div class="date">
+                                        <i class="fa-light fa-calendar-days"></i>
+                                        <p><%= data.date %></p>
+                                    </div>
+                                    <div class="comment">
+                                        <i class="fa-light fa-comments"></i>
+                                        <p><%= data.comments || '0' %> Comments</p>
+                                    </div>
+                                    <div class="view">
+                                        <i class="fa-light fa-folder-open"></i>
+                                        <p><%= data.category %></p>
+                                    </div>
+                                </div>
+                                <div class="title" style="margin-top: 20px;">
+                                    <h3><%= data.title %></h3>
+                                </div>
+                                <div class="text">
+                                    <div class="blog-content-body">
+                                        <%- data.content %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="divider-2"></div>
+                        <div class="blog-tags">
+                            <div class="tag-wrap">
+                                <p>Tags:</p>
+                                <div class="tags">
+                                    <button>Nature</button>
+                                    <button>Charity</button>
+                                </div>
+                            </div>
+                            <div class="socials">
+                                <div class="social-links">
+                                    <a href="#" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href), '_blank'); return false;"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" onclick="window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(window.location.href) + '&text=' + encodeURIComponent('<%= data.title %>'), '_blank'); return false;"><i class="fab fa-x-twitter"></i></a>
+                                    <a href="#" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(window.location.href), '_blank'); return false;"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4">
+                <div class="detail-sidebar" data-aos="fade-up" data-aos-delay="800" data-aos-duration="1000">
+                    <div class="detail-sidebar-inner">
+                        <div class="s-widget-wrap m-b-30">
+                            <div class="w-title">
+                                <h3>Search Here</h3>
+                                <div class="bar-wrap">
+                                    <div class="bar-1"></div>
+                                    <div class="bar-2"></div>
+                                </div>
+                            </div>
+                            <form action="/econest/blog" method="GET" class="search-bar">
+                                <input name="search" placeholder="Search..." type="text">
+                                <button type="submit" style="background:none; border:none;"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </form>
+                        </div>
+
+                        <% if (typeof sidebar !== 'undefined' && sidebar.categories && sidebar.categories.length > 0) { %>
+                        <div class="s-widget-wrap m-b-30">
+                            <div class="w-title">
+                                <h3>Categories</h3>
+                                <div class="bar-wrap">
+                                    <div class="bar-1"></div>
+                                    <div class="bar-2"></div>
+                                </div>
+                            </div>
+                            <div class="detail-list">
+                                <ul>
+                                    <% sidebar.categories.forEach(function(cat) { %>
+                                    <li>
+                                        <a href="/econest/blog?category=<%= cat.slug %>">
+                                            <%= cat.name %>
+                                            <span class="icon"><i class="fa-regular fa-arrow-up-right"></i></span>
+                                        </a>
+                                    </li>
+                                    <% }); %>
+                                </ul>
+                            </div>
+                        </div>
+                        <% } %>
+
+                        <% if (typeof sidebar !== 'undefined' && sidebar.recentPosts && sidebar.recentPosts.length > 0) { %>
+                        <div class="s-widget-wrap m-b-30">
+                            <div class="w-title">
+                                <h3>Recent Posts</h3>
+                                <div class="bar-wrap">
+                                    <div class="bar-1"></div>
+                                    <div class="bar-2"></div>
+                                </div>
+                            </div>
+                            <div class="recent-campaigns">
+                                <% sidebar.recentPosts.forEach(function(post) { %>
+                                <div class="campaign">
+                                    <div class="thumb">
+                                        <a href="/econest/blog/<%= post.slug %>">
+                                            <img alt="<%= post.title %>" src="<%= post.image %>">
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <div class="date">
+                                            <p><%= post.date %></p>
+                                        </div>
+                                        <div class="name">
+                                            <h5><a href="/econest/blog/<%= post.slug %>"><%= post.title %></a></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }); %>
+                            </div>
+                        </div>
+                        <% } %>
+
+                        <div class="s-widget-wrap">
+                            <div class="w-title">
+                                <h3>Share With Everyone</h3>
+                                <div class="bar-wrap">
+                                    <div class="bar-1"></div>
+                                    <div class="bar-2"></div>
+                                </div>
+                            </div>
+                            <div class="socials">
+                                <div class="social-links">
+                                    <a href="#" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href), '_blank'); return false;"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" onclick="window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(window.location.href) + '&text=' + encodeURIComponent('<%= data.title %>'), '_blank'); return false;"><i class="fab fa-x-twitter"></i></a>
+                                    <a href="#" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(window.location.href), '_blank'); return false;"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-shape-1"><img alt="shape-31" src="/assets/img/shapes/shape-31.webp"></div>
+</section>
+<!-- blog-details-section end -->

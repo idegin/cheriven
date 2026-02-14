@@ -1,55 +1,25 @@
-<!-- hero-section start -->
-<section class="breadcrumb-section">
-    <div class="container-fluid">
-        <div class="row g-0">
-            <div class="col-xl-6 col-lg-6">
-                <div class="breadcrumb-content" style="background-image: url(/assets/img/bg/breadcrumb-bg.webp)">
-                    <div class="breadcrumb-nav" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                        <ul>
-                            <li><a href='/'>Home</a></li>
-                            <li><a href="#">Volunteers</a></li>
-                        </ul>
-                    </div>
-                    <div class="breadcrumb-title" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
-                        <h2>Our Volunteers</h2>
-                    </div>
-                    <div class="shape-1">
-                        <img src="/assets/img/shapes/shape-1.webp" alt="shape"/>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-6 col-lg-6 d-none d-lg-block">
-                <div class="breadcrumb-thumb">
-                    <img src="/assets/img/thumbs/thumb-110.webp" alt="thumb"/>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- hero-section end -->
+<%
+// The handler passes 'data' which is the array of volunteers
+const volunteers = locals.data || [];
+console.log("This is the volunteers from ejs", volunteers);
+%>
 
-<%- include('../../components/home-volunteers') %>
+<%- include('../../components/shared/breadcrumb', { title: 'We Are Friends', crumbs: [{text: 'Home', href: '/econest/'}, {text: 'Volunteers', href: '#'}] }) %>
 
-<!-- become-volunteer-section start -->
-<section class="become-volunteer-section p-b-120 p-b-md-100 p-b-xs-80">
+<!-- volunteer-section start -->
+<section class="volunteer-section p-t-100">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-xl-8 text-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                <div class="common-title">
-                    <h2>Ready to Make a Difference?</h2>
-                </div>
-                <p class="mb-5">Join our community of dedicated volunteers and help us create a better world together.</p>
-                <a class="e-primary-btn has-icon" href="/contact">
-                    Join Our Team
-                    <span class="icon-wrap">
-                        <span class="icon"><i class="fa-regular fa-arrow-right"></i><i class="fa-regular fa-arrow-right"></i></span>
-                    </span>
-                </a>
-            </div>
+        <div class="row" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+            <% if(volunteers && volunteers.length > 0) { %>
+                <% volunteers.forEach(function(volunteer) { %>
+                    <%- include('../../components/volunteers/card', { data: volunteer }) %>
+                <% }); %>
+            <% } else { %>
+                <div class="col-12 text-center"><p>No volunteers found at the moment.</p></div>
+            <% } %>
         </div>
     </div>
 </section>
-<!-- become-volunteer-section end -->
+<!-- volunteer-section end -->
 
-<%- include('../../components/testimonials') %>
-<%- include('../../components/partners') %>
+<%- include('../../components/volunteers/cta') %>

@@ -29,30 +29,31 @@
                 </div>
             </div>
             <div class="col-xl-6" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
+                <% (locals.volunteers || []).forEach((volunteer) => { %>
                 <div class="friends-card m-b-20">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="author-details">
                                 <div class="author-info">
-                                    <h5>Joshua Sendu</h5>
-                                    <p>CEO-Founder</p>
+                                    <h5><%= volunteer.data.name %></h5>
+                                    <p><%= volunteer.data.role %></p>
                                     <div class="description">
-                                        <p>The point of using lorem ipsum is that has more-less packages normal
-                                            commercial</p>
+                                        <p><%= volunteer.data.bio %></p>
                                     </div>
                                 </div>
                                 <div class="socials">
                                     <div class="social-links">
-                                        <a href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a> <a
-                                            href="https://twitter.com/"><i class="fab fa-x-twitter"></i></a> <a
-                                            href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                                        <% if (volunteer.data.linkedin_url) { %>
+                                            <a href="<%= volunteer.data.linkedin_url %>" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                        <% } %>
+                                        <!-- Other socials can be added if schema supports them -->
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="thumb">
-                                <img alt="thumb" src="assets/img/thumbs/thumb-17.webp">
+                                <img alt="<%= volunteer.data.name %>" src="<%= volunteer.data.avatar ? volunteer.data.avatar.url : 'assets/img/thumbs/thumb-17.webp' %>">
                                 <div class="details-btn-3">
                                     <i class="fa-regular fa-arrow-right-long"></i>
                                 </div>
@@ -61,102 +62,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="friends-card m-b-20">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="author-details">
-                                <div class="author-info">
-                                    <h5>Joshua Sendu</h5>
-                                    <p>Head Volunteer</p>
-                                    <div class="description">
-                                        <p>The point of using lorem ipsum is that has more-less packages normal
-                                            commercial</p>
-                                    </div>
-                                </div>
-                                <div class="socials">
-                                    <div class="social-links">
-                                        <a href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a> <a
-                                            href="https://twitter.com/"><i class="fab fa-x-twitter"></i></a> <a
-                                            href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="thumb">
-                                <img alt="thumb" src="assets/img/thumbs/thumb-18.webp">
-                                <div class="details-btn-3">
-                                    <i class="fa-regular fa-arrow-right-long"></i>
-                                </div>
-                                <div class="category"><img alt="category" src="assets/img/shapes/shape-49.webp"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="friends-card m-b-20">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="author-details">
-                                <div class="author-info">
-                                    <h5>Joshua Sendu</h5>
-                                    <p>Volunteer</p>
-                                    <div class="description">
-                                        <p>The point of using lorem ipsum is that has more-less packages normal
-                                            commercial</p>
-                                    </div>
-                                </div>
-                                <div class="socials">
-                                    <div class="social-links">
-                                        <a href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a> <a
-                                            href="https://twitter.com/"><i class="fab fa-x-twitter"></i></a> <a
-                                            href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="thumb">
-                                <img alt="thumb" src="assets/img/thumbs/thumb-19.webp">
-                                <div class="details-btn-3">
-                                    <i class="fa-regular fa-arrow-right-long"></i>
-                                </div>
-                                <div class="category"><img alt="category" src="assets/img/shapes/shape-50.webp"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="friends-card">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="author-details">
-                                <div class="author-info">
-                                    <h5>Joshua Sendu</h5>
-                                    <p>Volunteer</p>
-                                    <div class="description">
-                                        <p>The point of using lorem ipsum is that has more-less packages normal
-                                            commercial</p>
-                                    </div>
-                                </div>
-                                <div class="socials">
-                                    <div class="social-links">
-                                        <a href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a> <a
-                                            href="https://twitter.com/"><i class="fab fa-x-twitter"></i></a> <a
-                                            href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="thumb">
-                                <img alt="thumb" src="assets/img/thumbs/thumb-20.webp">
-                                <div class="details-btn-3">
-                                    <i class="fa-regular fa-arrow-right-long"></i>
-                                </div>
-                                <div class="category"><img alt="category" src="assets/img/shapes/shape-51.webp"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <% }); %>
             </div>
         </div>
     </div>

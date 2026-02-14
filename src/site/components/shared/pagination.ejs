@@ -1,0 +1,38 @@
+<div class="row justify-content-center text-center <%= (typeof extraClasses !== 'undefined' && extraClasses) ? extraClasses : 'm-t-30' %>">
+    <div class="col-xl-6">
+        <div class="project-pagination">
+            <ul>
+            <ul>
+                <% if (typeof pagination !== 'undefined' && pagination.totalPages > 1) { %>
+                    <!-- Previous -->
+                    <% if (pagination.page > 1) { %>
+                        <li class="icon">
+                            <a href="?page=<%= pagination.page - 1 %>"><i class="fa-regular fa-arrow-left"></i></a>
+                        </li>
+                    <% } %>
+
+                    <!-- Pages -->
+                    <% for(let i = 1; i <= pagination.totalPages; i++) { %>
+                        <li class="<%= pagination.page === i ? 'active' : '' %>">
+                            <a href="?page=<%= i %>"><%= i < 10 ? '0' + i : i %></a>
+                        </li>
+                    <% } %>
+
+                    <!-- Next -->
+                    <% if (pagination.page < pagination.totalPages) { %>
+                        <li class="icon">
+                            <a href="?page=<%= pagination.page + 1 %>"><i class="fa-regular fa-arrow-right"></i></a>
+                        </li>
+                    <% } %>
+                <% } else { %>
+                    <!-- Static Fallback if no pagination data -->
+                    <li class="active"><a href="#">01</a></li>
+                    <li><a href="#">02</a></li>
+                    <li><a href="#">03</a></li>
+                    <li class="icon"><a href="#"><i class="fa-regular fa-arrow-right"></i></a></li>
+                <% } %>
+            </ul>
+            </ul>
+        </div>
+    </div>
+</div>

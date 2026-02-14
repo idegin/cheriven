@@ -1,48 +1,22 @@
-<!-- hero-section start -->
-<section class="breadcrumb-section">
-    <div class="container-fluid">
-        <div class="row g-0">
-            <div class="col-xl-6 col-lg-6">
-                <div class="breadcrumb-content" style="background-image: url(/assets/img/bg/breadcrumb-bg.webp)">
-                    <div class="breadcrumb-nav" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                        <ul>
-                            <li><a href='/'>Home</a></li>
-                            <li><a href="#">Programs</a></li>
-                        </ul>
-                    </div>
-                    <div class="breadcrumb-title" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
-                        <h2>Our Programs</h2>
-                    </div>
-                    <div class="shape-1">
-                        <img src="/assets/img/shapes/shape-1.webp" alt="shape"/>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-6 col-lg-6 d-none d-lg-block">
-                <div class="breadcrumb-thumb">
-                    <img src="/assets/img/thumbs/thumb-110.webp" alt="thumb"/>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- hero-section end -->
+<%
+// The handler passes 'data' which is the array of programs
+const programs = locals.data || [];
+%>
 
-<%- include('../../components/all-programs') %>
+<%- include('../../components/shared/breadcrumb', { title: 'Our Programs', crumbs: [{text: 'Home', href: '/econest/'}, {text: 'Programs', href: '#'}] }) %>
 
-<!-- Call to Action -->
-<section class="cta-section p-t-60 p-b-120">
+<!-- services-section start -->
+<section class="services-section p-t-100 p-b-120">
     <div class="container">
-        <div class="row justify-content-center">
-             <div class="col-xl-8 text-center">
-                 <div class="common-title">
-                     <h2>Want to Support a Specific Cause?</h2>
-                 </div>
-                 <p class="mb-4">Your contribution can directly impact the success of these programs.</p>
-                 <a class="e-primary-btn has-icon" href="/donations">Donate to a Campaign <span class="icon-wrap"><span class="icon"><i class="fa-regular fa-arrow-right"></i><i class="fa-regular fa-arrow-right"></i></span></span></a>
-             </div>
+        <%- include('../../components/shared/section-header', { title: 'Your Gift For a Greener Tomorrow', subtitle: 'Our Programs' }) %>
+    </div>
+    <div class="container">
+        <div class="row" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+            <% programs.forEach(function(program) { %>
+                <%- include('../../components/programs/card', { data: program }) %>
+            <% }); %>
         </div>
+        <%- include('../../components/shared/pagination') %>
     </div>
 </section>
-
-<%- include('../../components/partners') %>
+<!-- services-section end -->

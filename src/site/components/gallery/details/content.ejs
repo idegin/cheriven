@@ -1,0 +1,23 @@
+<div class="row m-b-40">
+    <div class="col-12">
+        <div class="details-title m-b-20" data-aos="fade-up" data-aos-duration="1000">
+            <h2><%= data.title %></h2>
+        </div>
+        <div class="detail-text" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+            <p><%= data.description %></p>
+        </div>
+    </div>
+</div>
+
+<div style="margin-bottom: 10rem;" class="row ">
+    <% if (data.images && data.images.length > 0) { %>
+        <% data.images.forEach(function(image, index) { %>
+            <div class="col-xl-4 col-lg-4 col-md-6 m-b-30" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="<%= 200 + (index * 100) %>">
+                <div class="project-thumb">
+                    <img src="<%= image.src %>" alt="<%= image.alt || 'Gallery Image' %>" class="w-100 rounded">
+                </div>
+            </div>
+        <% }); %>
+    <% } %>
+</div>
+

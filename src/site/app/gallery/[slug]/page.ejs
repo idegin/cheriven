@@ -1,0 +1,16 @@
+<%- include('../../../components/shared/breadcrumb', {
+    title: data.title,
+    crumbs: [
+        {text: 'Home', href: '/econest/'},
+        {text: 'Gallery', href: '/econest/gallery'},
+        {text: data.title, href: '#'}
+    ]
+}) %>
+
+<!-- gallery-details-section start -->
+<section class="services-details-section p-t-120 p-b-120">
+    <div class="container ">
+        <%- include('../../../components/gallery/details/content', { data: data }) %>
+    </div>
+</section>
+<!-- gallery-details-section end -->

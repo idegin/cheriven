@@ -1,0 +1,71 @@
+
+import { CMSListResponse, CollectionSlug, CollectionTypeMap, IDEGIN_CLOUD_BASE_URL, IDEGIN_CLOUD_SECRET_KEY } from '../types/cms-types';
+
+async function cmsRequest<T>(endpoint: string, options?: RequestInit): Promise<T>
+{
+    const response = await fetch(`${IDEGIN_CLOUD_BASE_URL}${endpoint}`, {
+        ...options,
+        headers: {
+            'Authorization': `Bearer ${IDEGIN_CLOUD_SECRET_KEY}`,
+            'Content-Type': 'application/json',
+            ...(options?.headers || {}),
+        },
+    });
+
+    if (!response.ok) {
+        // Try to read error body but mostly just throw
+        const errorText = await response.text().catch(() => 'Unknown error');
+        throw new Error(`CMS Request Failed: ${response.status} ${response.statusText} - ${errorText}`);
+    }
+    return response.json();
+}
+
+/**
+ * Validated wrapper around getAll to make it easier to reuse.
+ * Note: 'search' query param is supported by the backend if needed.
+ */
+export async function getCollection<S extends CollectionSlug>(
+    slug: S,
+    query?: { page?: number; limit?: number; sort?: string; filter?: Record<string, any>; populate?: any; }
+): Promise<CMSListResponse<CollectionTypeMap[ S ]>>
+{
+    const params = new URLSearchParams();
+    if (query?.page) params.set('page', query.page.toString());
+    if (query?.limit) params.set('limit', query.limit.toString());
+    if (query?.sort) params.set('sort', query.sort);
+
+    // Add simple filters if provided (e.g., filter[slug][eq]=xyz)
+    if (query?.filter) {
+        Object.entries(query.filter).forEach(([ key, val ]) =>
+        {
+            // This assumes simple equality or passing full filter string structure might be needed for complex queries
+            // For now, let's allow constructing query strings manually or expanding this if needed.
+            // A simple pass-through for now:
+            if (typeof val === 'object') {
+                Object.entries(val).forEach(([ op, opVal ]) =>
+                {
+                    params.set(`filter[${key}][${op}]`, String(opVal));
+                });
+            } else {
+                params.set(`filter[${key}][eq]`, String(val));
+            }
+        });
+    }
+
+    const queryString = params.toString();
+    const endpoint = `/public/cms/collections/${slug}${queryString ? `?${queryString}` : ''}`;
+    return cmsRequest<CMSListResponse<CollectionTypeMap[ S ]>>(endpoint);
+}
+
+export async function getEntryBySlug<S extends CollectionSlug>(
+    slug: S,
+    entrySlug: string
+): Promise<CollectionTypeMap[ S ] | null>
+{
+    const endpoint = `/public/cms/collections/${slug}?filter[slug][eq]=${entrySlug}&limit=1`;
+    const res = await cmsRequest<CMSListResponse<CollectionTypeMap[ S ]>>(endpoint);
+    if (res.success && res.data.entries.length > 0) {
+        return res.data.entries[ 0 ].data;
+    }
+    return null;
+}
