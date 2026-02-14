@@ -5,7 +5,10 @@ import { getCollection } from '../../../lib/cms-service';
 export default async function handler(req: Request, res: Response)
 {
     try {
-        const response = await getCollection('programs');
+        const page = parseInt(req.query.page as string) || 1;
+        const limit = parseInt(req.query.limit as string) || 9;
+
+        const response = await getCollection('programs', { page, limit });
 
         // Transform API data to match template expectation
         // Note: CMS Programs type currently lacks fundraising specific fields (goal, raised, etc.)
@@ -29,6 +32,7 @@ export default async function handler(req: Request, res: Response)
             data: {
                 data: programs
             },
+            pagination: response.data.pagination,
             metadata: {
                 title: 'Our Programs - Cheriven Foundation',
                 description: 'Explore our active programs and campaigns.'

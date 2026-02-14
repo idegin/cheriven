@@ -26,13 +26,14 @@ async function cmsRequest<T>(endpoint: string, options?: RequestInit): Promise<T
  */
 export async function getCollection<S extends CollectionSlug>(
     slug: S,
-    query?: { page?: number; limit?: number; sort?: string; filter?: Record<string, any>; populate?: any; }
+    query?: { page?: number; limit?: number; sort?: string; filter?: Record<string, any>; populate?: any; search?: string; }
 ): Promise<CMSListResponse<CollectionTypeMap[ S ]>>
 {
     const params = new URLSearchParams();
     if (query?.page) params.set('page', query.page.toString());
     if (query?.limit) params.set('limit', query.limit.toString());
     if (query?.sort) params.set('sort', query.sort);
+    if (query?.search) params.set('search', query.search);
 
     // Add simple filters if provided (e.g., filter[slug][eq]=xyz)
     if (query?.filter) {

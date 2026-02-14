@@ -5,6 +5,11 @@
         </div>
         <div class="detail-text" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
             <p><%= data.description %></p>
+            <% if (data.content) { %>
+                <div class="content-body m-t-20">
+                    <%- data.content %>
+                </div>
+            <% } %>
         </div>
     </div>
 </div>
@@ -14,7 +19,9 @@
         <% data.images.forEach(function(image, index) { %>
             <div class="col-xl-4 col-lg-4 col-md-6 m-b-30" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="<%= 200 + (index * 100) %>">
                 <div class="project-thumb">
-                    <img src="<%= image.src %>" alt="<%= image.alt || 'Gallery Image' %>" class="w-100 rounded">
+                    <a href="<%= image.src %>" data-fancybox="gallery" data-caption="<%= image.alt || data.title %>">
+                        <img src="<%= image.src %>" alt="<%= image.alt || 'Gallery Image' %>" class="w-100 rounded">
+                    </a>
                 </div>
             </div>
         <% }); %>

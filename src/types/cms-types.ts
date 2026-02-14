@@ -87,7 +87,8 @@ export type Gallery = {
     thumbnail: CMSFile;
     excerpt: string;
     content: string;
-    files: CMSFile;
+    images: CMSFile[];
+    files: CMSFile[];
 };
 
 export type Programs = {
