@@ -1,0 +1,20 @@
+<div class="row justify-content-center m-t-50" data-aos="fade-up" data-aos-duration="1000">
+    <div class="col-xl-8 col-lg-10 text-center">
+        <div class="empty-state">
+            <div class="icon m-b-20" style="font-size: 60px; color: var(--paragraph-color); opacity: 0.5;">
+                <i class="fa-light fa-box-open"></i>
+            </div>
+            <h3 class="title m-b-10" style="color: var(--heading-color);">No Items Found</h3>
+            <p class="text" style="color: var(--paragraph-color);">
+                <%= message || 'We couldn\'t find what you were looking for. Please check back later.' %>
+            </p>
+            <% if (typeof showButton !== 'undefined' && showButton) { %>
+                <div class="m-t-30">
+                    <a href="<%= buttonLink || '/econest/' %>" class="e-primary-btn">
+                        <%= buttonText || 'Go Home' %> <i class="fa-regular fa-arrow-right"></i>
+                    </a>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>

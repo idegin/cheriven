@@ -28,82 +28,27 @@
         <div class="completed-project-slider-active" data-aos="fade-up" data-aos-delay="800" data-aos-duration="1000">
             <div class="swiper">
                 <div class="swiper-wrapper">
+                    <% (locals.programs || []).forEach((program, index) => { %>
                     <div class="swiper-slide">
                         <div class="project-card">
                             <div class="thumb">
-                                <a href='project.html'><img alt="thumb-11" src="assets/img/thumbs/thumb-11.webp"></a>
+                                <a href='/programs/<%= program.data.slug %>'><img alt="<%= program.data.name %>" src="<%= program.data.thumbnail ? program.data.thumbnail.url : '/assets/img/thumbs/thumb-11.webp' %>"></a>
                                 <div class="number">
-                                    <a href='project.html'>No - 02</a>
+                                    <a href='/programs/<%= program.data.slug %>'>No - <%= String(index + 1).padStart(2, '0') %></a>
                                 </div>
                                 <div class="content">
-                                    <h5>Forest Cleaning</h5>
-                                    <p>Energy consulting involves providing of advice and guidance on energy</p>
+                                    <h5><%= program.data.name %></h5>
+                                    <p><%= program.data.excerpt %></p>
                                     <div class="details-btn">
-                                        <a class='e-primary-btn is-hover-white has-icon' href='project.html'>View
-                                            All Projects
+                                        <a class='e-primary-btn is-hover-white has-icon' href='/programs/<%= program.data.slug %>'>View
+                                            Details
                                             <span class="icon-wrap"><span class="icon"><i class="fa-regular fa-arrow-right"></i> <i class="fa-regular fa-arrow-right"></i></span></span></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="project-card">
-                            <div class="thumb">
-                                <a href='project.html'><img alt="thumb-12" src="assets/img/thumbs/thumb-12.webp"></a>
-                                <div class="number">
-                                    <a href='project.html'>No - 03</a>
-                                </div>
-                                <div class="content">
-                                    <h5>Waste Management</h5>
-                                    <p>Energy consulting involves providing of advice and guidance on energy</p>
-                                    <div class="details-btn">
-                                        <a class='e-primary-btn is-hover-white has-icon' href='project.html'>View
-                                            All Projects
-                                            <span class="icon-wrap"><span class="icon"><i class="fa-regular fa-arrow-right"></i> <i class="fa-regular fa-arrow-right"></i></span></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="project-card">
-                            <div class="thumb">
-                                <a href='project.html'><img alt="thumb-13" src="assets/img/thumbs/thumb-13.webp"></a>
-                                <div class="number">
-                                    <a href='project.html'>No - 04</a>
-                                </div>
-                                <div class="content">
-                                    <h5>Cleaning & Recycling</h5>
-                                    <p>Energy consulting involves providing of advice and guidance on energy</p>
-                                    <div class="details-btn">
-                                        <a class='e-primary-btn is-hover-white has-icon' href='project.html'>View
-                                            All Projects
-                                            <span class="icon-wrap"><span class="icon"><i class="fa-regular fa-arrow-right"></i> <i class="fa-regular fa-arrow-right"></i></span></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="project-card">
-                            <div class="thumb">
-                                <a href='project.html'><img alt="thumb-12" src="assets/img/thumbs/thumb-12.webp"></a>
-                                <div class="number">
-                                    <a href='project.html'>No - 03</a>
-                                </div>
-                                <div class="content">
-                                    <h5>Waste Management</h5>
-                                    <p>Energy consulting involves providing of advice and guidance on energy</p>
-                                    <div class="details-btn">
-                                        <a class='e-primary-btn is-hover-white has-icon' href='project.html'>View
-                                            All Projects
-                                            <span class="icon-wrap"><span class="icon"><i class="fa-regular fa-arrow-right"></i> <i class="fa-regular fa-arrow-right"></i></span></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <% }); %>
                 </div>
             </div>
             <div class="container">

@@ -1,0 +1,25 @@
+<%- include('../../../components/shared/breadcrumb', {
+    title: data.title,
+    crumbs: [
+        {text: 'Home', href: '/econest/'},
+        {text: 'Programs', href: '/econest/programs'},
+        {text: data.title, href: '#'}
+    ]
+}) %>
+<!-- services-details-section start -->
+<section class="services-details-section p-t-120 p-b-250 p-t-lg-80 p-t-md-80 p-t-xs-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="details-layout-wrap">
+                    <%- include('../../../components/programs/details/content', { data: data }) %>
+                    <%- include('../../../components/programs/details/sidebar', { data: data }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-shape-1">
+        <img src="/assets/img/shapes/shape-31.webp" alt="shape-31"/>
+    </div>
+</section>
+<!-- services-details-section end -->

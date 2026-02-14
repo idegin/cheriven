@@ -1,0 +1,17 @@
+<div class="col-xl-6 m-b-30">
+    <div class="project-card style-2 style-service">
+        <div class="thumb">
+            <a href='/gallery/<%= data.slug %>'><img alt="<%= data.title %>" src="<%= data.image %>"></a>
+            <div class="tag">
+                <p>No - <%= data.number %></p>
+            </div>
+            <div class="content">
+                <h5><%= data.title %></h5>
+                <p><%= data.description %></p>
+                <div class="join-us">
+                    <a class='e-primary-btn has-icon' href='/gallery/<%= data.slug %>'>Read More <span class="icon-wrap"><span class="icon"><i class="fa-regular fa-arrow-right"></i> <i class="fa-regular fa-arrow-right"></i></span></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

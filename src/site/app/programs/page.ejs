@@ -1,0 +1,22 @@
+<%
+// The handler passes 'data' which is the array of programs
+const programs = locals.data || [];
+%>
+
+<%- include('../../components/shared/breadcrumb', { title: 'Our Programs', crumbs: [{text: 'Home', href: '/econest/'}, {text: 'Programs', href: '#'}] }) %>
+
+<!-- services-section start -->
+<section class="services-section p-t-100 p-b-120">
+    <div class="container">
+        <%- include('../../components/shared/section-header', { title: 'Your Gift For a Greener Tomorrow', subtitle: 'Our Programs' }) %>
+    </div>
+    <div class="container">
+        <div class="row" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+            <% programs.forEach(function(program) { %>
+                <%- include('../../components/programs/card', { data: program }) %>
+            <% }); %>
+        </div>
+        <%- include('../../components/shared/pagination') %>
+    </div>
+</section>
+<!-- services-section end -->

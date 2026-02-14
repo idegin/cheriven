@@ -9,7 +9,7 @@
 							<a href='/'><img alt="logo" src="/assets/img/logo/logo-white.svg"></a>
 						</div>
 						<div class="text">
-							<p>Introducing our team of talented and skilled professionals who are ready to increase your productivity and bring your business.</p>
+							<p>Cheriven Empowerment Foundation is dedicated to improving the lives of the less privileged and vulnerable in society through sustainable development and charity.</p>
 						</div>
 						<div class="info">
 							<p><b>We Are Available !!</b></p>
@@ -26,48 +26,39 @@
 					<h3 class="w-title">Quick Links</h3>
 					<ul>
 						<li>
-							<a href='about.html'>About Company</a>
+							<a href='/about'>About Us</a>
 						</li>
 						<li>
-							<a href='services.html'>Our Causes</a>
+							<a href='/programs'>Our Programs</a>
 						</li>
 						<li>
-							<a href='camping-donation.html'>Investor Presentation</a>
+							<a href='/donations'>Donate</a>
 						</li>
 						<li>
-							<a href='donations.html'>Pricing Plan</a>
+							<a href='/volunteers'>Volunteers</a>
 						</li>
 						<li>
-							<a href='volunteer.html'>Meet Our Team</a>
-						</li>
-						<li>
-							<a href='contact.html'>Contact Us</a>
+							<a href='/contact'>Contact Us</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 			<div class="col-xl-2 col-lg-4 col-md-5">
 				<div class="footer-widget">
-					<h3 class="w-title">Our Services</h3>
+					<h3 class="w-title">Our Programs</h3>
 					<ul>
+                        <%
+                           const footerPrograms = locals.programs || locals.recentPrograms || [];
+                           if (footerPrograms.length > 0) {
+                               footerPrograms.slice(0, 6).forEach(function(program) {
+                        %>
 						<li>
-							<a href='camping-details.html'>Tree Plantation</a>
+							<a href='/programs/<%= program.slug || program.data.slug %>'><%= program.title || program.data.name %></a>
 						</li>
-						<li>
-							<a href='camping-donation.html'>Forest Cleaning</a>
-						</li>
-						<li>
-							<a href='services-details.html'>Plastic Recycling</a>
-						</li>
-						<li>
-							<a href='project.html'>Natural Power</a>
-						</li>
-						<li>
-							<a href='project.html'>Renewable Energy</a>
-						</li>
-						<li>
-							<a href='project-details.html'>Water Refine</a>
-						</li>
+                        <%     });
+                           } else { %>
+                        <li><a href="/programs">View All Programs</a></li>
+                        <% } %>
 					</ul>
 				</div>
 			</div>
@@ -77,7 +68,7 @@
 					<div class="subscribe-form">
 						<form action="#">
 							<div class="input-wrap">
-								<input placeholder="ashikulislambsl@gmail.com" type="text">
+								<input placeholder="Email Address" type="text">
 							</div>
 							<div class="input-button">
 								<button class="e-primary-btn has-icon is-hover-white" type="submit">Subscribe Now <span class="icon-wrap"><span class="icon"><i class="fa-regular fa-arrow-right"></i> <i class="fa-regular fa-arrow-right"></i></span></span></button>
@@ -95,15 +86,15 @@
 				<div class="footer-bottom-layout m-b-xs-40">
 					<a class="e-primary-btn is-hover-white top-btn" href="#">Go Top <i class="fa-regular fa-arrow-up"></i></a>
 					<div class="footer-copyright">
-						© 2025 Econest. All Rights Reserved.
+						© <%= new Date().getFullYear() %> Cheriven. All Rights Reserved.
 					</div>
 					<div class="footer-bottom-menu">
 						<ul>
 							<li>
-								<a href='contact.html'>Privacy Policy</a>
+								<a href='/contact'>Privacy Policy</a>
 							</li>
 							<li>
-								<a href='contact.html'>Privacy Policy</a>
+								<a href='/contact'>Terms & Conditions</a>
 							</li>
 						</ul>
 					</div>

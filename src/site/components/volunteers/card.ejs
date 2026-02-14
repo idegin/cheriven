@@ -1,0 +1,29 @@
+<div class="col-xl-3 m-b-30">
+    <div class="volunteer-card">
+        <a href='/volunteers/<%= data.slug %>'>
+            <div class="thumb">
+                <img src="<%= data.image %>" alt="<%= data.name %>">
+            </div>
+            <div class="author-info">
+                <h5><%= data.name %></h5>
+                <p><%= data.role %></p>
+            </div>
+        </a>
+        <div class="socials">
+            <button class="share-button">
+                <i class="fa-light fa-share-nodes"></i>
+            </button>
+            <div class="social-links">
+                <a href="<%= data.socials?.facebook || 'https://facebook.com' %>">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="<%= data.socials?.twitter || 'https://twitter.com' %>">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="<%= data.socials?.instagram || 'https://www.instagram.com' %>">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

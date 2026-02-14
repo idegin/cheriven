@@ -1,0 +1,26 @@
+<%
+// The handler passes 'data' which is the array of gallery items
+const galleryItems = locals.data || [];
+%>
+
+<%- include('../../components/shared/breadcrumb', { title: 'Our Gallery', crumbs: [{text: 'Home', href: '/econest/'}, {text: 'Gallery', href: '#'}] }) %>
+
+<!-- gallery-section start -->
+<section class="services-section p-t-100 p-b-120">
+    <div class="container">
+        <%- include('../../components/shared/section-header', { title: 'Moments We Captured', subtitle: 'Our Gallery' }) %>
+    </div>
+    <div class="container">
+        <div class="row" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+            <% if (galleryItems && galleryItems.length > 0) { %>
+                <% galleryItems.forEach(function(item) { %>
+                    <%- include('../../components/gallery/card', { data: item }) %>
+                <% }); %>
+            <% } else { %>
+                 <div class="col-12 text-center"><p>No gallery items found.</p></div>
+            <% } %>
+        </div>
+        <%- include('../../components/shared/pagination') %>
+    </div>
+</section>
+<!-- gallery-section end -->
