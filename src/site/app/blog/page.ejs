@@ -2,7 +2,7 @@
 const blogs = locals.data || [];
 %>
 
-<%- include('../../components/shared/breadcrumb', { title: 'Latest News', crumbs: [{text: 'Home', href: '/econest/'}, {text: 'Blog', href: '#'}] }) %>
+<%- include('../../components/shared/breadcrumb', { title: 'Latest News', crumbs: [{text: 'Home', href: '/'}, {text: 'Blog', href: '#'}] }) %>
 
 <!-- blog-section start -->
 <section class="blog-section p-t-120 p-b-120">
@@ -13,7 +13,7 @@ const blogs = locals.data || [];
                     <div class="col-xl-4 col-md-6 col-sm-12 m-b-30">
                         <div class="blog-card-2">
                             <div class="thumb">
-                                <a href="/econest/blog/<%= blog.slug %>">
+                                <a href="/blog/<%= blog.slug %>">
                                     <img src="<%= blog.image %>" alt="<%= blog.title %>"/>
                                 </a>
                                 <div class="event-date">
@@ -46,7 +46,7 @@ const blogs = locals.data || [];
                                     </div>
                                 </div>
                                 <div class="content-bottom">
-                                    <a class='e-primary-btn has-icon has-small read-more-btn' href='/econest/blog/<%= blog.slug %>'>
+                                    <a class='e-primary-btn has-icon has-small read-more-btn' href='/blog/<%= blog.slug %>'>
                                         Read More
                                         <span class="icon-wrap"><span class="icon"><i class="fa-regular fa-arrow-right"></i><i class="fa-regular fa-arrow-right"></i></span></span>
                                     </a>

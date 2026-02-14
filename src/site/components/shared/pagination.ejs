@@ -2,36 +2,31 @@
     <div class="col-xl-6">
         <div class="project-pagination">
             <ul>
-            <ul>
-                <% if (typeof pagination !== 'undefined' && pagination.totalPages > 1) { %>
+                <% if (typeof locals.pagination !== 'undefined' && locals.pagination.totalPages > 1) {
+                    const currentPage = locals.pagination.page;
+                    const totalPages = locals.pagination.totalPages;
+                %>
                     <!-- Previous -->
-                    <% if (pagination.page > 1) { %>
+                    <% if (currentPage > 1) { %>
                         <li class="icon">
-                            <a href="?page=<%= pagination.page - 1 %>"><i class="fa-regular fa-arrow-left"></i></a>
+                            <a href="?page=<%= currentPage - 1 %>"><i class="fa-regular fa-arrow-left"></i></a>
                         </li>
                     <% } %>
 
                     <!-- Pages -->
-                    <% for(let i = 1; i <= pagination.totalPages; i++) { %>
-                        <li class="<%= pagination.page === i ? 'active' : '' %>">
+                    <% for(let i = 1; i <= totalPages; i++) { %>
+                        <li class="<%= currentPage === i ? 'active' : '' %>">
                             <a href="?page=<%= i %>"><%= i < 10 ? '0' + i : i %></a>
                         </li>
                     <% } %>
 
                     <!-- Next -->
-                    <% if (pagination.page < pagination.totalPages) { %>
+                    <% if (currentPage < totalPages) { %>
                         <li class="icon">
-                            <a href="?page=<%= pagination.page + 1 %>"><i class="fa-regular fa-arrow-right"></i></a>
+                            <a href="?page=<%= currentPage + 1 %>"><i class="fa-regular fa-arrow-right"></i></a>
                         </li>
                     <% } %>
-                <% } else { %>
-                    <!-- Static Fallback if no pagination data -->
-                    <li class="active"><a href="#">01</a></li>
-                    <li><a href="#">02</a></li>
-                    <li><a href="#">03</a></li>
-                    <li class="icon"><a href="#"><i class="fa-regular fa-arrow-right"></i></a></li>
                 <% } %>
-            </ul>
             </ul>
         </div>
     </div>

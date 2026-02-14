@@ -75,9 +75,10 @@
                                     <div class="bar-2"></div>
                                 </div>
                             </div>
-                            <form action="/econest/blog" method="GET" class="search-bar">
+                            <form action="/blog" method="GET" class="search-bar">
                                 <input name="search" placeholder="Search..." type="text">
-                                <button type="submit" style="background:none; border:none;"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                <button type="submit"></button>
+                                <i class="fa-solid fa-magnifying-glass"></i>
                             </form>
                         </div>
 
@@ -94,7 +95,7 @@
                                 <ul>
                                     <% sidebar.categories.forEach(function(cat) { %>
                                     <li>
-                                        <a href="/econest/blog?category=<%= cat.slug %>">
+                                        <a href="/blog?category=<%= cat.slug %>">
                                             <%= cat.name %>
                                             <span class="icon"><i class="fa-regular fa-arrow-up-right"></i></span>
                                         </a>
@@ -118,7 +119,7 @@
                                 <% sidebar.recentPosts.forEach(function(post) { %>
                                 <div class="campaign">
                                     <div class="thumb">
-                                        <a href="/econest/blog/<%= post.slug %>">
+                                        <a href="/blog/<%= post.slug %>">
                                             <img alt="<%= post.title %>" src="<%= post.image %>">
                                         </a>
                                     </div>
@@ -127,7 +128,7 @@
                                             <p><%= post.date %></p>
                                         </div>
                                         <div class="name">
-                                            <h5><a href="/econest/blog/<%= post.slug %>"><%= post.title %></a></h5>
+                                            <h5><a href="/blog/<%= post.slug %>"><%= post.title %></a></h5>
                                         </div>
                                     </div>
                                 </div>

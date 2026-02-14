@@ -8,6 +8,8 @@ export default async function handler(req: Request, res: Response)
     try {
         const entry = await getEntryBySlug('gallery', slug);
 
+        console.log("This is the entry", entry);
+
         if (!entry) {
             return {
                 data: { data: {} },
@@ -15,23 +17,39 @@ export default async function handler(req: Request, res: Response)
             };
         }
 
-        const images = [];
-        // Handle images field which might be single or array despite type definition
-        const entryImages: any = entry.images;
-        if (Array.isArray(entryImages)) {
-            images.push(...entryImages.map((img: any) => ({ src: img.url, alt: img.filename || entry.name })));
-        } else if (entryImages) {
-            images.push({ src: entryImages.url, alt: entryImages.filename || entry.name });
+        const images: { src: string; alt: string; }[] = [];
+
+        // Handle 'images' field (array of CMSFile)
+        if (Array.isArray(entry.images)) {
+            entry.images.forEach((img: any) =>
+            {
+                if (img && img.url) {
+                    images.push({ src: img.url, alt: img.filename || entry.name });
+                }
+            });
         }
 
-        // If no images found in 'images', fallback to thumbnail
+        // Handle 'files' field (array of CMSFile, per user sample)
+        // The type definition says 'files' is CMSFile (single), but sample shows array. safely handle array.
+        const entryFiles: any = entry.files;
+        if (Array.isArray(entryFiles)) {
+            entryFiles.forEach((file: any) =>
+            {
+                if (file && file.url) {
+                    images.push({ src: file.url, alt: file.filename || entry.name });
+                }
+            });
+        }
+
+        // If no images found in 'images' or 'files', fallback to thumbnail
         if (images.length === 0 && entry.thumbnail) {
             images.push({ src: entry.thumbnail.url, alt: entry.name });
         }
 
         const galleryItem = {
             title: entry.name,
-            description: entry.excerpt || entry.content || '',
+            description: entry.excerpt || '',
+            content: entry.content || '',
             images: images.length > 0 ? images : [ { src: '/assets/img/thumbs/thumb-69.webp', alt: 'Placeholder' } ]
         };
 

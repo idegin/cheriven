@@ -5,7 +5,11 @@ import { getCollection } from '../../../lib/cms-service';
 export default async function handler(req: Request, res: Response)
 {
     try {
-        const response = await getCollection('blog', { sort: '-createdAt' });
+        const page = parseInt(req.query.page as string) || 1;
+        const limit = parseInt(req.query.limit as string) || 9;
+        const search = req.query.search as string || '';
+
+        const response = await getCollection('blog', { page, limit, search, sort: '-createdAt' });
 
         const blogs = response.data.entries.map((entry: any) =>
         {
@@ -28,6 +32,7 @@ export default async function handler(req: Request, res: Response)
             data: {
                 data: blogs
             },
+            pagination: response.data.pagination,
             metadata: {
                 title: 'Blog - Cheriven Foundation',
                 description: 'Latest news and updates from Cheriven Foundation.'

@@ -1,8 +1,45 @@
-<div class="container mx-auto px-4 py-12">
-  <div class="text-center max-w-2xl mx-auto">
-    <h1 class="text-9xl font-bold text-muted-foreground">404</h1>
-    <h2 class="text-3xl font-bold mb-4">Page Not Found</h2>
-    <p class="text-lg text-muted-foreground mb-8">Sorry, the page you are looking for doesn't exist.</p>
-    <a href="/" class="inline-flex items-center justify-center rounded-md bg-primary px-8 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90">Go Home</a>
-  </div>
-</div>
+<%- include('../components/shared/breadcrumb', {
+    title: '404 Error',
+    crumbs: [
+        { text: 'Home', href: '/' },
+        { text: '404', href: '#' }
+    ]
+}) %>
+
+<!-- error-section start -->
+<section class="error-section p-t-150 p-b-150 text-center position-relative overflow-hidden">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-10">
+                <div class="error-content" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="error-thumb m-b-30">
+                        <h1 style="font-size: 10rem; font-weight: 700; color: var(--primary-color); line-height: 1; opacity: 0.2;">404</h1>
+                    </div>
+                    <div class="section-title m-b-20" style="margin-top: -80px;">
+                        <h2 class="title" style="font-size: 3rem;">Oops! Page not found</h2>
+                    </div>
+                    <div class="description m-b-40">
+                        <p style="font-size: 1.125rem; color: var(--paragraph-color);">
+                            The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
+                        </p>
+                    </div>
+                    <div class="btn-wrap justify-content-center d-flex">
+                        <a class="e-primary-btn has-icon" href="/">
+                            Back to Home
+                            <span class="icon-wrap">
+                                <span class="icon"><i class="fa-regular fa-arrow-right"></i><i class="fa-regular fa-arrow-right"></i></span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shape-1 d-none d-lg-block" style="position: absolute; left: 5%; bottom: 20%; pointer-events: none; z-index: -1;">
+        <img src="/assets/img/shapes/shape-48.webp" alt="shape">
+    </div>
+    <div class="shape-2 d-none d-lg-block" style="position: absolute; right: 5%; top: 20%; pointer-events: none; z-index: -1;">
+        <img src="/assets/img/icons/icon-15.svg" alt="shape" style="opacity: 0.1; width: 100px;">
+    </div>
+</section>
+<!-- error-section end -->
