@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row g-0">
             <div class="col-xl-6 col-lg-6">
-                <div class="breadcrumb-content" style="background-image: url(/assets/img/bg/breadcrumb-bg.webp);">
+                <div class="breadcrumb-content" style="background-image: url(<%= (typeof bgImage !== 'undefined' && bgImage) ? bgImage : '/images/NGO/WhatsApp Image 2026-02-06 at 6.31.33 PM.jpeg' %>);">
                     <div class="breadcrumb-nav" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                         <ul>
                             <% if (typeof crumbs !== 'undefined' && crumbs) { %>
@@ -26,7 +26,7 @@
             </div>
             <div class="col-xl-6 col-lg-6 d-none d-lg-block">
                 <div class="breadcrumb-thumb">
-                    <img src="<%= (typeof thumb !== 'undefined' && thumb) ? thumb : '/assets/img/thumbs/thumb-1.webp' %>" alt="thumb">
+                    <img src="<%= (typeof thumb !== 'undefined' && thumb) ? thumb : '/images/NGO/WhatsApp Image 2026-02-06 at 6.31.28 PM.jpeg' %>" alt="thumb">
                 </div>
             </div>
         </div>

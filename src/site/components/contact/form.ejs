@@ -6,11 +6,11 @@
                 <div class="contact-form-wrap" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                     <h3>Get in touch with our team</h3>
                     <p>Fill out the form and Feel free to say !!</p>
-                    <form id="contact-form" action="/assets/mail.php" method="post">
+                    <form id="contact-form" action="/api/contact" method="post">
                         <div class="row form-row">
                             <div class="col-xl-6">
                                 <div class="input-wrap">
-                                    <input type="text" placeholder="Full Name" name="name">
+                                    <input type="text" placeholder="Full Name" name="name" required>
                                 </div>
                             </div>
                             <div class="col-xl-6">
@@ -20,41 +20,16 @@
                             </div>
                         </div>
                         <div class="row form-row">
-                            <div class="col-xl-6">
+                            <div class="col-xl-12">
                                 <div class="input-wrap">
-                                    <input type="email" placeholder="Email Address" name="email">
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="input-wrap">
-                                    <input type="text" placeholder="Current Location" name="location">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row form-row">
-                            <div class="col-xl-6">
-                                <div class="input-wrap">
-                                    <input type="text" placeholder="Date of Birth" name="date">
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="select-wrap">
-                                    <select name="occupation">
-                                        <option value="0">Occupation</option>
-                                        <option value="1">Doctor</option>
-                                        <option value="2">Engineer</option>
-                                        <option value="3">Teacher</option>
-                                    </select>
-                                    <div class="select-icon">
-                                        <i class="fa-regular fa-angle-down"></i>
-                                    </div>
+                                    <input type="email" placeholder="Email Address" name="email" required>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xl-12">
                                 <div class="input-wrap">
-                                    <textarea placeholder="Say Something..." name="message"></textarea>
+                                    <textarea placeholder="Say Something..." name="message" required></textarea>
                                 </div>
                                 <div class="input-button">
                                     <button type="submit" class="e-primary-btn has-icon">
@@ -68,6 +43,49 @@
                         </div>
                     </form>
                     <p class="form-message"></p>
+
+                    <script>
+                        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+                            e.preventDefault();
+                            const form = e.target;
+                            const formData = new FormData(form);
+                            const data = Object.fromEntries(formData.entries());
+                            const messageEl = document.querySelector('.form-message');
+                            const submitBtn = form.querySelector('button[type="submit"]');
+
+                            // Disable button
+                            submitBtn.disabled = true;
+                            submitBtn.innerHTML = 'Sending... <span class="icon-wrap"><span class="icon"><i class="fa-regular fa-spinner fa-spin"></i></span></span>';
+
+                            try {
+                                const response = await fetch('/api/contact', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify(data)
+                                });
+
+                                const result = await response.json();
+
+                                if (result.success) {
+                                    messageEl.textContent = result.message;
+                                    messageEl.style.color = 'green';
+                                    form.reset();
+                                } else {
+                                    messageEl.textContent = result.message || 'Error details sent to admin';
+                                    messageEl.style.color = 'red';
+                                }
+                            } catch (error) {
+                                console.error('Error:', error);
+                                messageEl.textContent = 'An error occurred. Please try again.';
+                                messageEl.style.color = 'red';
+                            } finally {
+                                submitBtn.disabled = false;
+                                submitBtn.innerHTML = 'Submit Now <span class="icon-wrap"><span class="icon"><i class="fa-regular fa-arrow-right"></i><i class="fa-regular fa-arrow-right"></i></span></span>';
+                            }
+                        });
+                    </script>
                 </div>
             </div>
         </div>

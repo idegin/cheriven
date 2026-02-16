@@ -4,7 +4,7 @@ import { initializePayment } from '../lib/paystack-service';
 
 export const handleDonation = async (req: Request, res: Response) =>
 {
-    const { amount, email, name, message } = req.body;
+    const { amount, email, name, message, programName } = req.body;
 
     if (!amount || !email) {
         return res.status(400).json({ error: 'Amount and Email are required' });
@@ -20,6 +20,7 @@ export const handleDonation = async (req: Request, res: Response) =>
 
         if (name) metadata.custom_fields.push({ display_name: "Donor Name", variable_name: "donor_name", value: name });
         if (message) metadata.custom_fields.push({ display_name: "Message", variable_name: "message", value: message });
+        if (programName) metadata.custom_fields.push({ display_name: "Program", variable_name: "program_name", value: programName });
 
         const result = await initializePayment(email, amountNumber, callbackUrl, metadata);
 

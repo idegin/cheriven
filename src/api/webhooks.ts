@@ -27,6 +27,7 @@ export const handlePaystackWebhook = async (req: Request, res: Response) =>
         const email = customer.email;
         let name = 'Anonymous';
         let message = '';
+        let program = '';
 
         if (metadata && metadata.custom_fields) {
             const donorNameField = metadata.custom_fields.find((f: any) => f.variable_name === 'donor_name');
@@ -34,6 +35,9 @@ export const handlePaystackWebhook = async (req: Request, res: Response) =>
 
             const messageField = metadata.custom_fields.find((f: any) => f.variable_name === 'message');
             if (messageField) message = messageField.value;
+
+            const programField = metadata.custom_fields.find((f: any) => f.variable_name === 'program_name');
+            if (programField) program = programField.value;
         }
 
         const donationData = {
@@ -41,7 +45,8 @@ export const handlePaystackWebhook = async (req: Request, res: Response) =>
             email,
             amount, // in kobo
             reference,
-            message
+            message,
+            program
         };
 
         // Send Email to Donor

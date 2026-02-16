@@ -17,7 +17,7 @@ export default async function handler(req: Request, res: Response)
             title: entry.data.name,
             slug: entry.data.slug,
             description: entry.data.excerpt || '',
-            image: entry.data.thumbnail?.url || '/assets/img/thumbs/thumb-2.webp',
+            image: entry.data.thumbnail?.url || '/images/NGO/WhatsApp Image 2026-02-06 at 6.32.25 PM.jpeg',
             category: 'Campaign', // Could be dynamic if added to schema
 
             // Mocked fields for UI demo purposes until schema is updated

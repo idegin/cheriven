@@ -3,7 +3,11 @@
 const galleryItems = locals.data || [];
 %>
 
-<%- include('../../components/shared/breadcrumb', { title: 'Our Gallery', crumbs: [{text: 'Home', href: '/'}, {text: 'Gallery', href: '#'}] }) %>
+<%- include('../../components/shared/breadcrumb', {
+    title: 'Our Gallery',
+    crumbs: [{text: 'Home', href: '/'}, {text: 'Gallery', href: '#'}],
+    bgImage: '/images/NGO/WhatsApp Image 2026-02-06 at 6.31.26 PM.jpeg'
+}) %>
 
 <!-- gallery-section start -->
 <section class="services-section p-t-100 p-b-120">
