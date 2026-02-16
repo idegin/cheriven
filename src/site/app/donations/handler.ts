@@ -31,12 +31,38 @@ export default async function handler(req: Request, res: Response)
             };
         });
 
+        // Check for program query parameter
+        let selectedProgram = null;
+        const programSlug = req.query.program as string;
+
+        if (programSlug) {
+            try {
+                const programResponse = await getCollection('programs', {
+                    limit: 1,
+                    filter: { slug: programSlug }
+                });
+
+                if (programResponse.data.entries.length > 0) {
+                    const p = programResponse.data.entries[ 0 ];
+                    selectedProgram = {
+                        title: p.data.name,
+                        slug: p.data.slug,
+                        image: p.data.thumbnail?.url
+                    };
+                }
+            } catch (err) {
+                console.warn('Failed to fetch selected program:', err);
+                // Continue without selected program if fetch fails
+            }
+        }
+
         return {
             data: {
-                recentPrograms
+                recentPrograms,
+                selectedProgram
             },
             metadata: {
-                title: 'Make a Donation - Support Our Causes',
+                title: selectedProgram ? `Donate to ${selectedProgram.title} - Cheriven Foundation` : 'Make a Donation - Support Our Causes',
                 description: 'Your donation helps us support vulnerable communities.'
             }
         };

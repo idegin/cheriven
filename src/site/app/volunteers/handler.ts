@@ -13,7 +13,7 @@ export default async function handler(req: Request, res: Response)
         const volunteers = response.data.entries.map((entry: any) => ({
             name: entry.data.name,
             role: entry.data.bio ? (entry.data.bio.substring(0, 30) + '...') : 'Volunteer',
-            image: entry.data.avatar?.url || '/assets/img/thumbs/thumb-17.webp',
+            image: entry.data.avatar?.url || '/images/NGO/WhatsApp Image 2026-02-06 at 6.32.19 PM.jpeg',
             description: entry.data.bio || '',
             slug: entry.data.slug
         }));

@@ -61,9 +61,11 @@ async function createApp()
     // We'll import at the top for better practice but here we insert the logic
     const { handleDonation } = await import('./api/donations.js');
     const { handlePaystackWebhook } = await import('./api/webhooks.js');
+    const { handleContactForm } = await import('./api/contact.js');
 
     app.post('/api/donations/initialize', handleDonation);
     app.post('/api/webhooks/paystack', handlePaystackWebhook);
+    app.post('/api/contact', handleContactForm);
 
     app.get('/donations/success', (req: Request, res: Response) =>
     {

@@ -1,5 +1,8 @@
-<% const footerModel = (typeof isFooter !== 'undefined' && isFooter); %>
+<%
+    const footerModel = (typeof isFooter !== 'undefined' && isFooter);
+    const textColor = footerModel ? '#fff' : '#000';
+%>
 <a href="/" class="d-flex align-items-center gap-2" style="text-decoration: none;">
     <img src="/logo.jpeg" alt="Cheriven Logo" style="height: 50px; width: 50px; object-fit: cover; border-radius: 100%;">
-    <span style="font-size: 24px; font-weight: bold; color: <%= footerModel ? '#fff' : '#000' %>; line-height: 1;">Cheriven</span>
+    <span style="font-size: 24px; font-weight: bold; color: <%= textColor %>; line-height: 1;">Cheriven</span>
 </a>

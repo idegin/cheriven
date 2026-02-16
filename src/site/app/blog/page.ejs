@@ -2,7 +2,11 @@
 const blogs = locals.data || [];
 %>
 
-<%- include('../../components/shared/breadcrumb', { title: 'Latest News', crumbs: [{text: 'Home', href: '/'}, {text: 'Blog', href: '#'}] }) %>
+<%- include('../../components/shared/breadcrumb', {
+    title: 'Latest News',
+    crumbs: [{text: 'Home', href: '/'}, {text: 'Blog', href: '#'}],
+    bgImage: '/images/NGO/WhatsApp Image 2026-02-06 at 6.32.46 PM.jpeg'
+}) %>
 
 <!-- blog-section start -->
 <section class="blog-section p-t-120 p-b-120">
