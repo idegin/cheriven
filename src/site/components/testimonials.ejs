@@ -27,94 +27,27 @@
                 <div class="testimonial-slider-active" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
                     <div class="swiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="testimonial-card">
-                                    <div class="thumb">
-                                        <img alt="thumb-10" src="assets/img/thumbs/thumb-10.webp">
-                                        <a class="video-play-btn" data-fancybox="" href="https://www.youtube.com/watch?v=fLeJJPxua3E&amp;ab_channel=Motiversity">Play</a>
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="rating">
-                                            <p>Rating</p><i class="fa-solid fa-star-sharp"></i> <span>5.0</span>
+                            <% (locals.reviews || []).forEach(review => { %>
+                                <div class="swiper-slide">
+                                    <div class="testimonial-card">
+                                        <div class="thumb">
+                                            <img alt="<%= review.data.name %>" src="<%= review.data.avatar.url %>">
                                         </div>
-                                        <div class="review">
-                                            <p>I was very impressed 😍 involves providing of advice and guidance on
-                                                energy-related for matters. Understand the advantages hiring
-                                                professionals to design and maintain your garden. 🙋</p>
-                                        </div>
-                                        <div class="author-details">
-                                            <h5>Penelope Miller <span>(Arjun)</span></h5>
-                                            <h6>Sr. Volunteer</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="testimonial-card">
-                                    <div class="thumb">
-                                        <img alt="thumb-10" src="assets/img/thumbs/thumb-10.2.webp">
-                                        <a class="video-play-btn" data-fancybox="" href="https://www.youtube.com/watch?v=fLeJJPxua3E&amp;ab_channel=Motiversity">Play</a>
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="rating">
-                                            <p>Rating</p><i class="fa-solid fa-star-sharp"></i> <span>5.0</span>
-                                        </div>
-                                        <div class="review">
-                                            <p>I was very impressed 😍 involves providing of advice and guidance on
-                                                energy-related for matters. Understand the advantages hiring
-                                                professionals to design and maintain your garden. 🙋</p>
-                                        </div>
-                                        <div class="author-details">
-                                            <h5>Penelope Miller <span>(Arjun)</span></h5>
-                                            <h6>Sr. Volunteer</h6>
+                                        <div class="card-content">
+                                            <div class="rating">
+                                                <p>Rating</p><i class="fa-solid fa-star-sharp"></i> <span>5.0</span>
+                                            </div>
+                                            <div class="review">
+                                                <p><%- review.data.content %></p>
+                                            </div>
+                                            <div class="author-details">
+                                                <h5><%= review.data.name %></h5>
+                                                <h6><%= review.data.role %></h6>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="testimonial-card">
-                                    <div class="thumb">
-                                        <img alt="thumb-10" src="assets/img/thumbs/thumb-10.3.webp">
-                                        <a class="video-play-btn" data-fancybox="" href="https://www.youtube.com/watch?v=fLeJJPxua3E&amp;ab_channel=Motiversity">Play</a>
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="rating">
-                                            <p>Rating</p><i class="fa-solid fa-star-sharp"></i> <span>5.0</span>
-                                        </div>
-                                        <div class="review">
-                                            <p>I was very impressed 😍 involves providing of advice and guidance on
-                                                energy-related for matters. Understand the advantages hiring
-                                                professionals to design and maintain your garden. 🙋</p>
-                                        </div>
-                                        <div class="author-details">
-                                            <h5>Penelope Miller <span>(Arjun)</span></h5>
-                                            <h6>Sr. Volunteer</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="testimonial-card">
-                                    <div class="thumb">
-                                        <img alt="thumb-10" src="assets/img/thumbs/thumb-10.2.webp">
-                                        <a class="video-play-btn" data-fancybox="" href="https://www.youtube.com/watch?v=fLeJJPxua3E&amp;ab_channel=Motiversity">Play</a>
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="rating">
-                                            <p>Rating</p><i class="fa-solid fa-star-sharp"></i> <span>5.0</span>
-                                        </div>
-                                        <div class="review">
-                                            <p>I was very impressed 😍 involves providing of advice and guidance on
-                                                energy-related for matters. Understand the advantages hiring
-                                                professionals to design and maintain your garden. 🙋</p>
-                                        </div>
-                                        <div class="author-details">
-                                            <h5>Penelope Miller <span>(Arjun)</span></h5>
-                                            <h6>Sr. Volunteer</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <% }); %>
                         </div>
                     </div>
                 </div>
