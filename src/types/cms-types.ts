@@ -1,6 +1,6 @@
 /**
  * Auto-generated Documentation for Cheriven Foundation CMS
- * Generated at: 2026-02-14T16:59:17.214Z
+ * Generated at: 2026-02-15T21:43:05.647Z
  */
 
 export const IDEGIN_CLOUD_SECRET_KEY = process.env.IDEGIN_CLOUD_SECRET_KEY;
@@ -56,7 +56,7 @@ export type CMSCountResponse = {
 
 export type CMSUpdateResponse<T> = CMSSingleResponse<T>;
 
-export type CollectionSlug = "blog" | "people" | "category" | "gallery" | "programs";
+export type CollectionSlug = "blog" | "people" | "category" | "gallery" | "programs" | "reviews";
 
 export type Blog = {
     name: string;
@@ -87,8 +87,7 @@ export type Gallery = {
     thumbnail: CMSFile;
     excerpt: string;
     content: string;
-    images: CMSFile[];
-    files: CMSFile[];
+    files: CMSFile;
 };
 
 export type Programs = {
@@ -100,12 +99,21 @@ export type Programs = {
     organizer: PopulatedRelatedEntry<People>;
 };
 
+export type Reviews = {
+    name: string;
+    slug: string;
+    avatar: CMSFile;
+    content: string;
+    role: string;
+};
+
 export type CollectionTypeMap = {
     "blog": Blog;
     "people": People;
     "category": Category;
     "gallery": Gallery;
     "programs": Programs;
+    "reviews": Reviews;
 };
 
 async function cmsRequest<T>(endpoint: string, options?: RequestInit): Promise<T>
