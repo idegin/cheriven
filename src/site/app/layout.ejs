@@ -1,40 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<body class="min-h-screen bg-background text-foreground">
-<!-- preloader start-->
-<div id="preloader">
-    <div class="preloader">
-        <img src="/assets/img/thumbs/preloader.gif" alt="preloader">
-    </div>
-</div>
-<!-- preloader end  -->
-
-<%- include('../components/header') %>
-<%- include('../components/off-canvas-sidebar') %>
-<%- include('../components/off-canvas-menubar') %>
-<main class="flex-1">
-    <% if (locals.layoutChain && locals.layoutChain.length > 1) { %>
-        <%- include('../' + locals.layoutChain[1], { body: body }) %>
-    <% } else { %>
-        <%- body %>
-    <% } %>
-    <%- include('../components/contact-cta') %>
-</main>
-<%- include('../components/footer') %>
-
-<!-- Vendors Js -->
-<script src="/assets/vendor/jquery/jquery.min.js"></script>
-<script src="/assets/vendor/popper/popper.min.js"></script>
-<script src="/assets/vendor/bootstrap/bootstrap.min.js"></script>
-<script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
-<script src="/assets/vendor/aos/aos.js"></script>
-<script src="/assets/vendor/fancybox/fancybox.umd.js"></script>
-<script src="/assets/vendor/counter/purecounter.js"></script>
-
-<!-- Main Js -->
-<script src="/assets/js/script.js"></script>
-</body>
-<head>
+    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -98,4 +64,39 @@
 
 
 </head>
+<body class="min-h-screen bg-background text-foreground">
+<!-- preloader start-->
+<div id="preloader">
+    <div class="preloader">
+        <img src="/assets/img/thumbs/preloader.gif" alt="preloader">
+    </div>
+</div>
+<!-- preloader end  -->
+
+<%- include('../components/header') %>
+<%- include('../components/off-canvas-sidebar') %>
+<%- include('../components/off-canvas-menubar') %>
+<main class="flex-1">
+    <% if (locals.layoutChain && locals.layoutChain.length > 1) { %>
+        <%- include('../' + locals.layoutChain[1], { body: body }) %>
+    <% } else { %>
+        <%- body %>
+    <% } %>
+    <%- include('../components/contact-cta') %>
+</main>
+<%- include('../components/footer') %>
+
+<!-- Vendors Js -->
+<script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/popper/popper.min.js"></script>
+<script src="/assets/vendor/bootstrap/bootstrap.min.js"></script>
+<script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/assets/vendor/aos/aos.js"></script>
+<script src="/assets/vendor/fancybox/fancybox.umd.js"></script>
+<script src="/assets/vendor/counter/purecounter.js"></script>
+
+<!-- Main Js -->
+<script src="/assets/js/script.js"></script>
+</body>
+
 </html>
