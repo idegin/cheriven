@@ -3,21 +3,43 @@ import { CMSListResponse, CollectionSlug, CollectionTypeMap, IDEGIN_CLOUD_BASE_U
 
 async function cmsRequest<T>(endpoint: string, options?: RequestInit): Promise<T>
 {
-    const response = await fetch(`${IDEGIN_CLOUD_BASE_URL}${endpoint}`, {
-        ...options,
-        headers: {
-            'Authorization': `Bearer ${IDEGIN_CLOUD_SECRET_KEY}`,
-            'Content-Type': 'application/json',
-            ...(options?.headers || {}),
-        },
-    });
+    const maxRetries = 5;
+    const timeout = 15000;
 
-    if (!response.ok) {
-        // Try to read error body but mostly just throw
-        const errorText = await response.text().catch(() => 'Unknown error');
-        throw new Error(`CMS Request Failed: ${response.status} ${response.statusText} - ${errorText}`);
+    for (let attempt = 1; attempt <= maxRetries; attempt++)
+    {
+        try
+        {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+            const response = await fetch(`${IDEGIN_CLOUD_BASE_URL}${endpoint}`, {
+                ...options,
+                signal: controller.signal,
+                headers: {
+                    'Authorization': `Bearer ${IDEGIN_CLOUD_SECRET_KEY}`,
+                    'Content-Type': 'application/json',
+                    ...(options?.headers || {}),
+                },
+            });
+
+            clearTimeout(timeoutId);
+
+            if (!response.ok)
+            {
+                const errorText = await response.text().catch(() => 'Unknown error');
+                throw new Error(`CMS Request Failed: ${response.status} ${response.statusText} - ${errorText}`);
+            }
+            return response.json();
+        }
+        catch (error)
+        {
+            if (attempt === maxRetries) throw error;
+            await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+        }
     }
-    return response.json();
+
+    throw new Error('Max retries reached');
 }
 
 /**

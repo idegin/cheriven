@@ -3,12 +3,21 @@ import { getAll } from '../../types/cms-types';
 
 export default async function handler(req: Request, res: Response)
 {
-    const [ programs, volunteers, blogs, reviews ] = await Promise.all([
-        getAll('programs', { limit: 6 }), // Sorting removed as API might not support it yet or needs specific syntax
-        getAll('people', { limit: 4 }),
-        getAll('blog', { limit: 6 }),
-        getAll('reviews', { limit: 6 })
-    ]);
+    let programs: any = { success: false };
+    let volunteers: any = { success: false };
+    let blogs: any = { success: false };
+    let reviews: any = { success: false };
+
+    try {
+        [ programs, volunteers, blogs, reviews ] = await Promise.all([
+            getAll('programs', { limit: 6 }),
+            getAll('people', { limit: 4 }),
+            getAll('blog', { limit: 6 }),
+            getAll('reviews', { limit: 6 })
+        ]);
+    } catch (error) {
+        console.error('Failed to fetch home page data:', error);
+    }
 
     return {
         data: {
