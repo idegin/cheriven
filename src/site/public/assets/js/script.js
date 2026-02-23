@@ -551,13 +551,16 @@
     if (jQuery(".blog-slider-active .swiper").length > 0) {
         let blogSlider = new Swiper('.blog-slider-active .swiper', {
             loop: true,
+            loopAdditionalSlides: 3,
             spaceBetween: 30,
             slidesPerView: 2,
-            slidesPerColumn: 1,
-            paginationClickable: true,
-            // autoplay: {
-            //     delay: 3000,
-            // },
+            speed: 1000,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            grabCursor: true,
+            watchSlidesProgress: true,
 
             pagination: {
                 el: '.blog-pagination',
@@ -579,7 +582,7 @@
                     slidesPerView: 1,
                 },
                 1024: {
-                    slidesPerView: 1,
+                    slidesPerView: 2,
                 },
                 1200: {
                     slidesPerView: 2,

@@ -1,15 +1,13 @@
 
-import { CMSListResponse, CollectionSlug, CollectionTypeMap, IDEGIN_CLOUD_BASE_URL, IDEGIN_CLOUD_SECRET_KEY } from '../types/cms-types';
+import { CMSListResponse, CMSSingleResponse, CollectionSlug, CollectionTypeMap, IDEGIN_CLOUD_BASE_URL, IDEGIN_CLOUD_SECRET_KEY } from '../types/cms-types';
 
 async function cmsRequest<T>(endpoint: string, options?: RequestInit): Promise<T>
 {
     const maxRetries = 5;
     const timeout = 15000;
 
-    for (let attempt = 1; attempt <= maxRetries; attempt++)
-    {
-        try
-        {
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+        try {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), timeout);
 
@@ -25,15 +23,13 @@ async function cmsRequest<T>(endpoint: string, options?: RequestInit): Promise<T
 
             clearTimeout(timeoutId);
 
-            if (!response.ok)
-            {
+            if (!response.ok) {
                 const errorText = await response.text().catch(() => 'Unknown error');
                 throw new Error(`CMS Request Failed: ${response.status} ${response.statusText} - ${errorText}`);
             }
             return response.json();
         }
-        catch (error)
-        {
+        catch (error) {
             if (attempt === maxRetries) throw error;
             await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
         }
@@ -85,10 +81,14 @@ export async function getEntryBySlug<S extends CollectionSlug>(
     entrySlug: string
 ): Promise<CollectionTypeMap[ S ] | null>
 {
-    const endpoint = `/public/cms/collections/${slug}?filter[slug][eq]=${entrySlug}&limit=1`;
-    const res = await cmsRequest<CMSListResponse<CollectionTypeMap[ S ]>>(endpoint);
-    if (res.success && res.data.entries.length > 0) {
-        return res.data.entries[ 0 ].data;
+    const endpoint = `/public/cms/collections/${slug}/slug/${entrySlug}`;
+    try {
+        const res = await cmsRequest<CMSSingleResponse<CollectionTypeMap[ S ]>>(endpoint);
+        if (res.success && res.data) {
+            return res.data.data;
+        }
+    } catch (error) {
+        console.error(`Error fetching entry by slug ${entrySlug}:`, error);
     }
     return null;
 }
