@@ -1,19 +1,22 @@
-<div class="details-content" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+<div
+    class="details-content"
+    data-aos="fade-up"
+    data-aos-duration="1000"
+    data-aos-delay="600"
+>
     <div class="thumb-wrap m-b-30">
-        <img src="<%= data.image %>" alt="thumb"/>
+        <img src="<%= data.image %>" alt="thumb" />
     </div>
 
     <div class="details-title m-b-15">
         <h2><%= data.title %></h2>
     </div>
     <div class="detail-text m-b-30">
-        <p>
-            <%= data.description %>
-        </p>
+        <p><%= data.description %></p>
     </div>
 
     <!-- Donation Section with only Donate Button -->
-    <div class="donation-card m-b-50">
+    <!-- <div class="donation-card m-b-50">
         <div class="d-flex justify-content-center">
             <a class='e-primary-btn has-icon' href='/donations'>
                 Donate Now
@@ -22,15 +25,12 @@
                 </span>
             </a>
         </div>
-    </div>
+    </div> -->
 
     <div class="details-title m-b-15">
         <h2>About The Project</h2>
     </div>
     <div class="detail-text m-b-25">
-        <div class="blog-content-body">
-            <%- data.aboutText %>
-        </div>
+        <div class="blog-content-body"><%- data.aboutText %></div>
     </div>
-
 </div>
