@@ -1,6 +1,6 @@
 /**
  * Auto-generated Documentation for Cheriven Foundation CMS
- * Generated at: 2026-02-15T21:43:05.647Z
+ * Generated at: 2026-03-06T13:00:40.443Z
  */
 
 export const IDEGIN_CLOUD_SECRET_KEY = process.env.IDEGIN_CLOUD_SECRET_KEY;
@@ -13,50 +13,50 @@ export type CMSFile = {
     size: number;
     mimeType: string;
     uploadedAt: string;
-};
+}
 
 export type PopulatedRelatedEntry<T = Record<string, unknown>> = {
     id: string;
     data: T;
-};
+}
 
 export type CMSEntryMeta = {
     id: string;
     createdAt: string;
     updatedAt: string;
-};
+}
 
 export type CMSPagination = {
     total: number;
     page: number;
     limit: number;
     totalPages: number;
-};
+}
 
 export type CMSListResponse<T> = {
     success: boolean;
     message: string;
     data: {
-        entries: (CMSEntryMeta & { data: T; })[];
+        entries: (CMSEntryMeta & { data: T })[];
         pagination: CMSPagination;
     };
-};
+}
 
 export type CMSSingleResponse<T> = {
     success: boolean;
     message: string;
-    data: CMSEntryMeta & { data: T; };
-};
+    data: CMSEntryMeta & { data: T };
+}
 
 export type CMSCountResponse = {
     success: boolean;
     message: string;
-    data: { count: number; };
-};
+    data: { count: number };
+}
 
 export type CMSUpdateResponse<T> = CMSSingleResponse<T>;
 
-export type CollectionSlug = "blog" | "people" | "category" | "gallery" | "programs" | "reviews";
+export type CollectionSlug = "blog" | "people" | "category" | "gallery" | "programs" | "reviews" | "events";
 
 export type Blog = {
     name: string;
@@ -65,7 +65,7 @@ export type Blog = {
     category: PopulatedRelatedEntry<Category>;
     excerpt: string;
     content: string;
-};
+}
 
 export type People = {
     name: string;
@@ -74,12 +74,12 @@ export type People = {
     bio: string;
     linkedin_url: string;
     role: string;
-};
+}
 
 export type Category = {
     name: string;
     slug: string;
-};
+}
 
 export type Gallery = {
     name: string;
@@ -88,7 +88,7 @@ export type Gallery = {
     excerpt: string;
     content: string;
     files: CMSFile;
-};
+}
 
 export type Programs = {
     name: string;
@@ -97,7 +97,7 @@ export type Programs = {
     excerpt: string;
     content: string;
     organizer: PopulatedRelatedEntry<People>;
-};
+}
 
 export type Reviews = {
     name: string;
@@ -105,7 +105,18 @@ export type Reviews = {
     avatar: CMSFile;
     content: string;
     role: string;
-};
+}
+
+export type Events = {
+    name: string;
+    slug: string;
+    thumbnail: CMSFile;
+    date: string;
+    location?: string | null;
+    content?: string | null;
+    cta_text: string;
+    cta_link: string;
+}
 
 export type CollectionTypeMap = {
     "blog": Blog;
@@ -114,54 +125,29 @@ export type CollectionTypeMap = {
     "gallery": Gallery;
     "programs": Programs;
     "reviews": Reviews;
+    "events": Events;
 };
 
-async function cmsRequest<T>(endpoint: string, options?: RequestInit): Promise<T>
-{
-    const maxRetries = 5;
-    const timeout = 15000;
-
-    for (let attempt = 1; attempt <= maxRetries; attempt++)
-    {
-        try
-        {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), timeout);
-
-            const response = await fetch(`${IDEGIN_CLOUD_BASE_URL}${endpoint}`, {
-                ...options,
-                signal: controller.signal,
-                headers: {
-                    'Authorization': `Bearer ${IDEGIN_CLOUD_SECRET_KEY}`,
-                    'Content-Type': 'application/json',
-                    ...options?.headers,
-                },
-            });
-
-            clearTimeout(timeoutId);
-
-            if (!response.ok)
-            {
-                const error = await response.json().catch(() => ({ message: 'Request failed' }));
-                throw new Error(error.message || `HTTP ${response.status}`);
-            }
-            return response.json();
-        }
-        catch (error)
-        {
-            if (attempt === maxRetries) throw error;
-            await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
-        }
+async function cmsRequest<T>(endpoint: string, options?: RequestInit): Promise<T> {
+    const response = await fetch(`${IDEGIN_CLOUD_BASE_URL}${endpoint}`, {
+        ...options,
+        headers: {
+            'Authorization': `Bearer ${IDEGIN_CLOUD_SECRET_KEY}`,
+            'Content-Type': 'application/json',
+            ...options?.headers,
+        },
+    });
+    if (!response.ok) {
+        const error = await response.json().catch(() => ({ message: 'Request failed' }));
+        throw new Error(error.message || `HTTP ${response.status}`);
     }
-
-    throw new Error('Max retries reached');
+    return response.json();
 }
 
 export async function getAll<S extends CollectionSlug>(
     slug: S,
-    options?: { page?: number; limit?: number; search?: string; }
-): Promise<CMSListResponse<CollectionTypeMap[ S ]>>
-{
+    options?: { page?: number; limit?: number; search?: string }
+): Promise<CMSListResponse<CollectionTypeMap[S]>> {
     const params = new URLSearchParams();
     if (options?.page) params.set('page', options.page.toString());
     if (options?.limit) params.set('limit', options.limit.toString());
@@ -173,30 +159,26 @@ export async function getAll<S extends CollectionSlug>(
 export async function getById<S extends CollectionSlug>(
     slug: S,
     id: string
-): Promise<CMSSingleResponse<CollectionTypeMap[ S ]>>
-{
+): Promise<CMSSingleResponse<CollectionTypeMap[S]>> {
     return cmsRequest(`/public/cms/collections/${slug}/${id}`);
 }
 
 export async function getBySlug<S extends CollectionSlug>(
     slug: S,
     entrySlug: string
-): Promise<CMSSingleResponse<CollectionTypeMap[ S ]>>
-{
+): Promise<CMSSingleResponse<CollectionTypeMap[S]>> {
     return cmsRequest(`/public/cms/collections/${slug}/slug/${entrySlug}`);
 }
 
-export async function getCount<S extends CollectionSlug>(slug: S): Promise<CMSCountResponse>
-{
+export async function getCount<S extends CollectionSlug>(slug: S): Promise<CMSCountResponse> {
     return cmsRequest(`/public/cms/collections/${slug}/count`);
 }
 
 export async function update<S extends CollectionSlug>(
     slug: S,
     id: string,
-    data: Partial<CollectionTypeMap[ S ]>
-): Promise<CMSUpdateResponse<CollectionTypeMap[ S ]>>
-{
+    data: Partial<CollectionTypeMap[S]>
+): Promise<CMSUpdateResponse<CollectionTypeMap[S]>> {
     return cmsRequest(`/public/cms/collections/${slug}/${id}`, {
         method: 'PUT',
         body: JSON.stringify(data),

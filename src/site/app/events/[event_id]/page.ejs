@@ -1,0 +1,107 @@
+<%- include('../../../components/shared/breadcrumb', {
+    title: data.title,
+    crumbs: [
+        {text: 'Home', href: '/'},
+        {text: 'Events', href: '/events'},
+        {text: data.title, href: '#'}
+    ]
+}) %>
+
+<section class="services-details-section p-t-120 p-b-250 p-t-lg-80 p-t-md-80 p-t-xs-60">
+<div class="container">
+<div class="row">
+<div class="col-xl-12">
+<div class="details-layout-wrap">
+<div class="details-content" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+<div class="thumb-wrap m-b-30">
+<img src="<%= data.image %>" alt="<%= data.title %>"/>
+</div>
+<div class="blog-info m-b-20">
+<div class="date">
+<i class="fa-light fa-calendar-days"></i>
+<p><%= data.date %></p>
+</div>
+<% if (data.time) { %>
+<div class="time">
+<i class="fa-regular fa-clock"></i>
+<p><%= data.time %></p>
+</div>
+<% } %>
+<% if (data.location) { %>
+<div class="view">
+<i class="fa-regular fa-location-dot"></i>
+<p><%= data.location %></p>
+</div>
+<% } %>
+</div>
+<div class="details-title m-b-15">
+<h2><%= data.title %></h2>
+</div>
+<% if (data.content) { %>
+<div class="detail-text m-b-30">
+<%- data.content %>
+</div>
+<% } %>
+<% if (data.cta_link && data.cta_link !== '#') { %>
+<div class="event-btn m-b-30">
+<a class="e-primary-btn has-icon" href="<%= data.cta_link %>">
+<%= data.cta_text %>
+<span class="icon-wrap">
+<span class="icon"><i class="fa-regular fa-arrow-right"></i><i class="fa-regular fa-arrow-right"></i></span>
+</span>
+</a>
+</div>
+<% } %>
+<div class="divider-2"></div>
+<div class="blog-tags">
+<div class="socials">
+<div class="social-links">
+<a href="#" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href), '_blank'); return false;"><i class="fab fa-facebook-f"></i></a>
+<a href="#" onclick="window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(window.location.href) + '&text=' + encodeURIComponent('<%= data.title %>'), '_blank'); return false;"><i class="fab fa-x-twitter"></i></a>
+<a href="#" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(window.location.href), '_blank'); return false;"><i class="fab fa-linkedin-in"></i></a>
+</div>
+</div>
+</div>
+</div>
+<div class="detail-sidebar" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
+<div class="detail-sidebar-inner">
+<% if (typeof recentEvents !== 'undefined' && recentEvents.length > 0) { %>
+<div class="s-widget-wrap m-b-30">
+<div class="w-title">
+<h3>Recent Events</h3>
+<div class="bar-wrap">
+<div class="bar-1"></div>
+<div class="bar-2"></div>
+</div>
+</div>
+<div class="recent-campaigns">
+<% recentEvents.forEach(function(event, index) { %>
+<div class="campaign<%= index === recentEvents.length - 1 ? ' campaign-last' : '' %>">
+<div class="thumb">
+<a href="/events/<%= event.slug %>">
+<img src="<%= event.image %>" alt="<%= event.title %>" style="object-fit: cover; height: 5.5rem;"/>
+</a>
+</div>
+<div>
+<div class="date">
+<p><%= event.date %></p>
+</div>
+<div class="name">
+<h5><a href="/events/<%= event.slug %>"><%= event.title %></a></h5>
+</div>
+</div>
+</div>
+<% }); %>
+</div>
+</div>
+<% } %>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="d-shape-1">
+<img src="assets/img/shapes/shape-31.webp" alt="shape-31"/>
+</div>
+</section>

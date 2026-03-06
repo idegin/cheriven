@@ -7,13 +7,15 @@ export default async function handler(req: Request, res: Response)
     let volunteers: any = { success: false };
     let blogs: any = { success: false };
     let reviews: any = { success: false };
+    let events: any = { success: false };
 
     try {
-        [ programs, volunteers, blogs, reviews ] = await Promise.all([
+        [ programs, volunteers, blogs, reviews, events ] = await Promise.all([
             getAll('programs', { limit: 6 }),
             getAll('people', { limit: 4 }),
             getAll('blog', { limit: 6 }),
-            getAll('reviews', { limit: 6 })
+            getAll('reviews', { limit: 6 }),
+            getAll('events', { limit: 4 })
         ]);
     } catch (error) {
         console.error('Failed to fetch home page data:', error);
@@ -26,7 +28,8 @@ export default async function handler(req: Request, res: Response)
             programs: programs.success ? programs.data.entries : [],
             volunteers: volunteers.success ? volunteers.data.entries : [],
             blogs: blogs.success ? blogs.data.entries : [],
-            reviews: reviews.success ? reviews.data.entries : []
+            reviews: reviews.success ? reviews.data.entries : [],
+            events: events.success ? events.data.entries : []
         },
         metadata: {
             title: 'Cheriven Foundation',
