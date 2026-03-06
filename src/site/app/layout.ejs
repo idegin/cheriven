@@ -22,10 +22,8 @@
         <% } %>
         <meta property="og:title" content="<%= locals.metadata.og.title || locals.metadata.title %>">
         <meta property="og:description" content="<%= locals.metadata.og.description || locals.metadata.description %>">
-        <% if (locals.metadata.og.image) { %>
-            <meta property="og:image" content="<%= locals.metadata.og.image %>">
-        <% } %>
     <% } %>
+            <meta property="og:image" content="/cheriven.jpeg">
 
     <!-- Twitter Meta Tags -->
     <% if (locals.metadata?.twitter) { %>
